@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <!-- Primary SEO Meta Tags -->
+    <title>Jonaid Ahmed (Rio) | Web Developer & Portfolio</title>
+    <meta name="title" content="Jonaid Ahmed (Rio) | Web Developer & Portfolio">
+    <meta name="description" content="Official portfolio of Jonaid Ahmed (Rio) - Web Developer & Cybersecurity Enthusiast. Custom web development, modern high-performance design, and secure digital architecture.">
+    <meta name="keywords" content="Jonaid, Rio, Jonaid Ahmed, Jonaid web developer, Jonaid portfolio, Rio web developer, Rio portfolio, cybersecurity, freelance web designer">
+    <meta name="author" content="Jonaid Ahmed (Rio)">
+    <meta name="robots" content="index, follow">
+
+    <!-- Open Graph / Facebook / LinkedIn SEO -->
+    <meta property="og:type" content="website">
+    <meta property="og:title" content="Jonaid Ahmed (Rio) | Web Developer & Portfolio">
+    <meta property="og:description" content="Official portfolio of Jonaid Ahmed (Rio). High-performance custom web development and digital solutions.">
+    <meta property="og:image" content="my-photo.jpeg">
+
+    <!-- Twitter SEO -->
+    <meta property="twitter:card" content="summary_large_image">
+    <meta property="twitter:title" content="Jonaid Ahmed (Rio) | Web Developer & Portfolio">
+    <meta property="twitter:description" content="Official portfolio of Jonaid Ahmed (Rio). Custom web development and cybersecurity solutions.">
+    <meta property="twitter:image" content="my-photo.jpeg">
+
+    <!-- JSON-LD Structured Data for Search Engine Entity Recognition -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Jonaid Ahmed",
+      "alternateName": "Rio",
+      "jobTitle": "Web Developer",
+      "description": "Web developer and cybersecurity enthusiast providing custom, high-performance website design services.",
+      "knowsAbout": ["Web Development", "HTML", "CSS", "JavaScript", "Cybersecurity", "UI/UX Design"]
+    }
+    </script>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- FontAwesome for Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- tsParticles -->
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-slim@2.0.6/tsparticles.slim.bundle.min.js"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        mono: ['Space Mono', 'monospace'],
+                    },
+                    colors: {
+                        cyber: {
+                            dark: '#0a0a0f',
+                            card: '#12121a',
+                            green: '#00ff66',
+                            teal: '#00e5ff',
+                            purple: '#b000ff'
+                        }
+                    },
+                    animation: {
+                        'pulse-fast': 'pulse 1s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+                        'float': 'float 3s ease-in-out infinite',
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        body {
+            background-color: #0a0a0f;
+            color: #e2e8f0;
+            overflow-x: hidden;
+        }
+
+        /* 3D Particle Container */
+        #tsparticles {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+            pointer-events: none;
+        }
+
+        .space-bg {
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(0, 229, 255, 0.08) 0%, transparent 25%),
+                radial-gradient(circle at 85% 30%, rgba(176, 0, 255, 0.08) 0%, transparent 25%);
+        }
+
+        .bg-mountains {
+            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.98), rgba(10, 10, 15, 0.75), rgba(10, 10, 15, 0.98)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        .bg-space {
+            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.95)), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+        .bg-forest {
+            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.98), rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.98)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2000&auto=format&fit=crop');
+            background-size: cover;
+            background-attachment: fixed;
+            background-position: center;
+        }
+
+        ::-webkit-scrollbar { width: 8px; }
+        ::-webkit-scrollbar-track { background: #0a0a0f; }
+        ::-webkit-scrollbar-thumb { background: #00ff66; border-radius: 4px; }
+
+        .glass-card {
+            background: rgba(18, 18, 26, 0.7);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+        }
+        
+        .glass-card:hover {
+            border-color: #00ff66;
+            box-shadow: 0 0 20px rgba(0, 255, 102, 0.1);
+        }
+
+        .glass-card > * {
+            transform: translateZ(30px);
+            transition: transform 0.3s ease;
+        }
+
+        .cursor::after {
+            content: '|';
+            animation: blink 1s step-end infinite;
+        }
+        @keyframes blink {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0; }
+        }
+    </style>
+</head>
+<body class="space-bg font-sans antialiased selection:bg-cyber-green selection:text-black">
+
+    <!-- 3D Particle Background Engine -->
+    <div id="tsparticles"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed w-full z-50 top-0 transition-all duration-300" id="navbar">
+        <div class="glass-card max-w-7xl mx-auto px-6 py-4 mt-4 rounded-full flex justify-between items-center mx-4 border-b-0 relative z-50 no-tilt">
+            <a href="#home" class="font-mono font-bold text-xl tracking-tighter text-white">
+                <span class="text-cyber-green">&lt;</span>RIO<span class="text-cyber-green">/&gt;</span>
+            </a>
+            
+            <div class="hidden md:flex space-x-8 font-mono text-sm items-center">
+                <a href="#about" class="hover:text-cyber-green transition-colors">About</a>
+                <a href="#services" class="hover:text-cyber-green transition-colors text-cyber-teal">Web Design</a>
+                <a href="#passions" class="hover:text-cyber-green transition-colors">Passions</a>
+                <a href="#cyber" class="hover:text-cyber-green transition-colors">Target: Cyber</a>
+                <a href="#faq" class="hover:text-cyber-green transition-colors">FAQ</a>
+                <a href="#contact" class="hover:text-cyber-green transition-colors">Comms</a>
+            </div>
+            
+            <a href="#contact" class="hidden md:inline-block border border-cyber-green text-cyber-green px-4 py-2 rounded-full hover:bg-cyber-green hover:text-black transition-all font-mono text-sm">
+                Initialize Contact
+            </a>
+            
+            <button id="mobile-btn" class="md:hidden text-cyber-green text-2xl focus:outline-none">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+
+        <div id="mobile-menu" class="hidden absolute top-20 left-4 right-4 glass-card no-tilt rounded-2xl flex-col items-center py-6 space-y-6 font-mono text-base shadow-2xl z-40">
+            <a href="#home" class="mobile-link text-white hover:text-cyber-green">Home</a>
+            <a href="#about" class="mobile-link text-white hover:text-cyber-green">About</a>
+            <a href="#services" class="mobile-link text-cyber-teal font-bold hover:text-cyber-green">Web Design</a>
+            <a href="#passions" class="mobile-link text-white hover:text-cyber-green">Passions</a>
+            <a href="#cyber" class="mobile-link text-white hover:text-cyber-green">Target: Cyber</a>
+            <a href="#faq" class="mobile-link text-white hover:text-cyber-green">FAQ</a>
+            <a href="#contact" class="mobile-link text-white border border-cyber-green px-6 py-2 rounded-full hover:bg-cyber-green hover:text-black">Contact</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-[100svh] flex items-center justify-center pt-24 px-6 relative bg-space">
+        <div class="max-w-4xl mx-auto text-center z-10">
+            <p class="font-mono text-cyber-teal mb-4 tracking-widest uppercase text-xs md:text-sm">System.out.println("Hello World");</p>
+            <h1 class="text-4xl sm:text-5xl md:text-7xl font-bold mb-6 tracking-tight text-white leading-tight">
+                I am <span class="text-transparent bg-clip-text bg-gradient-to-r from-cyber-green to-cyber-teal">Jonaid Ahmed (Rio)</span>
+            </h1>
+            <h2 class="text-xl sm:text-2xl md:text-3xl font-mono text-gray-400 mb-8 h-8 flex justify-center items-center">
+                <span id="typewriter" class="cursor"></span>
+            </h2>
+            <p class="text-gray-400 max-w-2xl mx-auto mb-10 leading-relaxed text-base md:text-lg px-4">
+                Class 12th student navigating the matrix. Bridging the gap between the mysteries of nature and the architecture of the digital world.
+            </p>
+            <div class="flex flex-col sm:flex-row justify-center gap-4 px-4">
+                <a href="#cyber" class="bg-cyber-green text-black font-bold px-8 py-3 rounded-full hover:shadow-[0_0_20px_rgba(0,255,102,0.4)] transition-all flex items-center justify-center gap-2 transform hover:scale-105">
+                    <i class="fas fa-terminal"></i> View Career Core
+                </a>
+                <a href="#services" class="border border-cyber-teal text-cyber-teal px-8 py-3 rounded-full hover:bg-cyber-teal hover:text-black transition-all flex items-center justify-center gap-2 transform hover:scale-105">
+                    <i class="fas fa-code"></i> Build a Website
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="py-16 md:py-20 px-6 relative">
+        <div class="max-w-6xl mx-auto">
+            <div class="flex flex-col md:flex-row gap-12 items-center">
+                <div class="w-full md:w-1/2 tilt-element">
+                    <div class="relative px-4 sm:px-0">
+                        <div class="absolute inset-0 border-2 border-cyber-teal rounded-lg translate-x-4 translate-y-4 -z-10 hidden sm:block transition-transform duration-500 hover:translate-x-6 hover:translate-y-6"></div>
+                        <img src="my-photo.jpeg" alt="Jonaid Ahmed (Rio) Web Developer Portfolio" class="rounded-lg shadow-2xl w-full object-cover aspect-[4/5] sm:aspect-square md:aspect-auto">
+                    </div>
+                </div>
+                <div class="w-full md:w-1/2">
+                    <h3 class="font-mono text-cyber-green text-base md:text-lg mb-2">01. // Who is Rio?</h3>
+                    <h2 class="text-3xl md:text-4xl font-bold text-white mb-6">The Mind Behind The Screen</h2>
+                    <p class="text-gray-400 mb-4 leading-relaxed text-sm md:text-base">
+                        I am Jonaid Ahmed, a Class 12th student and custom web developer continuously observing, learning, and analyzing the digital landscape.
+                    </p>
+                    <p class="text-gray-400 mb-6 leading-relaxed text-sm md:text-base">
+                        Known online as Jonaid or <span class="text-white font-bold">Rio</span>, I seek the quiet isolation of mountains and gardening while creating websites and mastering cybersecurity.
+                    </p>
+                    
+                    <div class="glass-card border border-pink-500/30 p-4 rounded-lg mb-6 shadow-[0_0_15px_rgba(236,72,153,0.1)] hover:border-pink-500/60">
+                        <p class="text-pink-400 font-mono text-xs md:text-sm leading-relaxed">
+                            <i class="fas fa-heart-broken mr-2"></i> Relationship Status: <span class="text-white">Single</span>
+                            <br>
+                            <span class="text-gray-500 text-xs mt-2 block">&gt;&gt; (Patiently waiting for a girl who understands my code and doesn't get scared by my horror stories...)</span>
+                        </p>
+                    </div>
+
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-4 font-mono text-sm text-gray-300">
+                        <li><i class="fas fa-check text-cyber-green mr-2"></i> Class 12th Student</li>
+                        <li><i class="fas fa-check text-cyber-green mr-2"></i> Aspiring Cyber Sec</li>
+                        <li><i class="fas fa-check text-cyber-green mr-2"></i> Poet & Writer</li>
+                        <li><i class="fas fa-check text-cyber-green mr-2"></i> Mountain Lover</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Web Design Services & Protocol Steps -->
+    <section id="services" class="py-16 md:py-20 px-6 relative bg-forest border-t border-b border-gray-800">
+        <div class="max-w-5xl mx-auto relative z-10">
+            <h3 class="font-mono text-cyber-teal text-base md:text-lg mb-2 text-center">02. // Freelance_Hub</h3>
+            <h2 class="text-3xl md:text-5xl font-bold text-white mb-6 text-center">Build a Website with Jonaid</h2>
+            <p class="text-gray-300 text-center max-w-2xl mx-auto mb-12 text-sm md:text-lg px-2">Need a stunning, high-performing website? From personal portfolios to business landing pages, Jonaid Ahmed builds modern digital experiences that capture attention and convert visitors.</p>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6 md:gap-8 mb-12">
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl text-center">
+                    <i class="fas fa-bolt text-4xl text-yellow-400 mb-4 drop-shadow-[0_0_10px_rgba(250,204,21,0.5)]"></i>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2">Fast & Responsive</h3>
+                    <p class="text-gray-400 text-sm">Flawless performance across all devices, from desktop monitors to mobile screens.</p>
+                </div>
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl text-center border-cyber-green/50 shadow-[0_0_15px_rgba(0,255,102,0.15)] relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-b from-cyber-green/10 to-transparent pointer-events-none"></div>
+                    <i class="fas fa-paint-brush text-4xl text-cyber-green mb-4 drop-shadow-[0_0_10px_rgba(0,255,102,0.5)] relative z-10"></i>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2 relative z-10">Modern Design</h3>
+                    <p class="text-gray-400 text-sm relative z-10">Dark mode aesthetics, smooth animations, and beautiful layouts tailored to your brand.</p>
+                </div>
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl text-center sm:col-span-2 md:col-span-1">
+                    <i class="fas fa-code text-4xl text-cyber-teal mb-4 drop-shadow-[0_0_10px_rgba(0,229,255,0.5)]"></i>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-2">Clean Code</h3>
+                    <p class="text-gray-400 text-sm">Built with clean architecture ensuring secure, fast, and easily maintainable web code.</p>
+                </div>
+            </div>
+            
+            <!-- Contact Action Buttons (Telegram & Email) -->
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4 md:gap-6 w-full max-w-xl mx-auto mb-16">
+                <a href="https://t.me/your_telegram_username" target="_blank" class="bg-sky-500 hover:bg-sky-400 text-black font-bold px-6 py-4 rounded-full transition-all flex items-center justify-center gap-3 shadow-[0_0_20px_rgba(14,165,233,0.3)] w-full transform hover:-translate-y-1">
+                    <i class="fab fa-telegram text-2xl"></i> Message on Telegram
+                </a>
+                <a href="mailto:JonaixRio@gmail.com" class="bg-cyber-card border border-cyber-teal text-cyber-teal hover:bg-cyber-teal hover:text-black font-bold px-6 py-4 rounded-full transition-all flex items-center justify-center gap-3 w-full transform hover:-translate-y-1">
+                    <i class="fas fa-envelope text-xl"></i> Send an Email
+                </a>
+            </div>
+
+            <!-- The Development Protocol (Steps Section) -->
+            <div class="glass-card p-6 md:p-10 rounded-3xl border border-cyber-green/30">
+                <h3 class="text-2xl font-bold text-white mb-8 text-center font-mono"><span class="text-cyber-green">&gt;</span> Website Build Protocol (5 Steps)</h3>
+                <div class="grid grid-cols-1 md:grid-cols-5 gap-6 text-center">
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-cyber-green/20 border border-cyber-green text-cyber-green flex items-center justify-center font-mono font-bold text-lg mb-4 shadow-[0_0_10px_rgba(0,255,102,0.3)]">01</div>
+                        <h4 class="text-white font-bold mb-2 text-sm">Contact Me</h4>
+                        <p class="text-gray-400 text-xs">Reach out via Telegram or Email to kick things off.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-cyber-teal/20 border border-cyber-teal text-cyber-teal flex items-center justify-center font-mono font-bold text-lg mb-4 shadow-[0_0_10px_rgba(0,229,255,0.3)]">02</div>
+                        <h4 class="text-white font-bold mb-2 text-sm">Discuss the Idea</h4>
+                        <p class="text-gray-400 text-xs">We talk about your goals, brand style, and requirements.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-cyber-purple/20 border border-cyber-purple text-cyber-purple flex items-center justify-center font-mono font-bold text-lg mb-4 shadow-[0_0_10px_rgba(176,0,255,0.3)]">03</div>
+                        <h4 class="text-white font-bold mb-2 text-sm">Choose Demo</h4>
+                        <p class="text-gray-400 text-xs">Review 3 tailored design demos and pick your favorite.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-yellow-500/20 border border-yellow-400 text-yellow-400 flex items-center justify-center font-mono font-bold text-lg mb-4 shadow-[0_0_10px_rgba(250,204,21,0.3)]">04</div>
+                        <h4 class="text-white font-bold mb-2 text-sm">Finishify</h4>
+                        <p class="text-gray-400 text-xs">The chosen version is polished with code and animations.</p>
+                    </div>
+                    <div class="flex flex-col items-center">
+                        <div class="w-12 h-12 rounded-full bg-green-500/20 border border-green-400 text-green-400 flex items-center justify-center font-mono font-bold text-lg mb-4 shadow-[0_0_10px_rgba(34,197,94,0.3)]">05</div>
+                        <h4 class="text-white font-bold mb-2 text-sm">Ready & Live</h4>
+                        <p class="text-gray-400 text-xs">Your custom-branded website goes live on the internet!</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Passions Section -->
+    <section id="passions" class="py-16 md:py-20 px-6 bg-mountains relative">
+        <div class="max-w-6xl mx-auto z-10 relative">
+            <h3 class="font-mono text-cyber-purple text-base md:text-lg mb-2 text-center">03. // Protocols & Subroutines</h3>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">What Drives Jonaid Ahmed</h2>
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                    <div class="text-3xl md:text-4xl text-cyber-teal mb-4"><i class="fas fa-feather-alt"></i></div>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-3">Poetry & Writing</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Putting chaos into words. Writing poetry to express the unspoken and tell engaging stories.</p>
+                </div>
+                
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                    <div class="text-3xl md:text-4xl text-yellow-500 mb-4"><i class="fas fa-motorcycle"></i></div>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-3">The Bike Nomad</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Traveling the world on a bike, feeling the wind, chasing horizons, and experiencing raw freedom.</p>
+                </div>
+
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                    <div class="text-3xl md:text-4xl text-green-500 mb-4"><i class="fas fa-mountain"></i></div>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-3">Mountain Calling</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">A deep love for nature and towering peaks where peace and perspective reign.</p>
+                </div>
+
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                    <div class="text-3xl md:text-4xl text-red-500 mb-4"><i class="fas fa-ghost"></i></div>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-3">Horror Storytelling</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Crafting fear and suspense through mystery genres and horror stories.</p>
+                </div>
+
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                    <div class="text-3xl md:text-4xl text-purple-500 mb-4"><i class="fas fa-user-astronaut"></i></div>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-3">Cosmos & Thought</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Fascinated by space, the universe, and deep intellectual discussions about reality.</p>
+                </div>
+
+                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                    <div class="text-3xl md:text-4xl text-emerald-400 mb-4"><i class="fas fa-seedling"></i></div>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-3">Gardening</h3>
+                    <p class="text-gray-400 text-sm leading-relaxed">Grounding in nature. Nurturing life from seeds teaches patience required for web code.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Career Goal (Cybersecurity) -->
+    <section id="cyber" class="py-16 md:py-20 px-4 md:px-6">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="font-mono text-cyber-green text-base md:text-lg mb-2 text-center">04. // Career_Path.exe</h3>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">The Cybersecurity Directive</h2>
+            
+            <div class="glass-card tilt-card bg-black rounded-lg border border-gray-800 shadow-[0_0_30px_rgba(0,255,102,0.1)] overflow-hidden p-0">
+                <div class="bg-gray-900 px-4 py-3 flex items-center border-b border-gray-800">
+                    <div class="flex space-x-2">
+                        <div class="w-3 h-3 rounded-full bg-red-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-yellow-500"></div>
+                        <div class="w-3 h-3 rounded-full bg-green-500"></div>
+                    </div>
+                    <div class="mx-auto font-mono text-[10px] sm:text-xs text-gray-500">rio@mainframe: ~/future_goals</div>
+                </div>
+                <div class="p-4 md:p-6 font-mono text-xs sm:text-sm md:text-base text-gray-300 overflow-x-auto">
+                    <p class="mb-2"><span class="text-cyber-green">rio@mainframe:~$</span> ./init_career.sh</p>
+                    <p class="text-yellow-400 mb-4 whitespace-normal break-words">[!] INITIALIZING PRIMARY OBJECTIVE: CYBERSECURITY PROFESSIONAL...</p>
+                    
+                    <p class="mb-2 whitespace-normal break-words">&gt; Status: <span class="text-white">Class 12 Student & Web Developer</span></p>
+                    <p class="mb-2 whitespace-normal break-words">&gt; Goal: <span class="text-white">To protect digital infrastructure and build secure websites.</span></p>
+                    <p class="mb-4 whitespace-normal break-words">&gt; Why Cyber? <span class="text-white">Cybersecurity is about uncovering hidden threats in the dark—combining patience, logic, and exploration.</span></p>
+                    
+                    <p class="text-cyber-teal mb-2">Loading Core Traits...</p>
+                    <ul class="list-none ml-2 md:ml-4 mb-4 text-gray-400">
+                        <li>[██████████] 100% Analytical Thinking</li>
+                        <li>[████████░░] 80% Threat Modeling (learning)</li>
+                        <li>[█████████░] 90% Problem Solving</li>
+                    </ul>
+                    
+                    <p class="mb-2 whitespace-normal break-words"><span class="text-cyber-green">rio@mainframe:~$</span> echo "The journey begins after 12th."</p>
+                    <p class="text-white mb-2">The journey begins after 12th.</p>
+                    <p><span class="text-cyber-green">rio@mainframe:~$</span> <span class="animate-pulse-fast">_</span></p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- FAQ Section -->
+    <section id="faq" class="py-16 md:py-20 px-6 bg-cyber-card/40 border-t border-gray-800 relative z-10">
+        <div class="max-w-4xl mx-auto">
+            <h3 class="font-mono text-cyber-teal text-base md:text-lg mb-2 text-center">05. // Knowledge_Base</h3>
+            <h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">Frequently Asked Questions</h2>
+            
+            <div class="space-y-6 font-mono">
+                <div class="glass-card p-6 rounded-2xl border border-gray-800">
+                    <h3 class="text-white font-bold text-base mb-2 flex items-center gap-2">
+                        <span class="text-cyber-green">&gt;</span> How long does Jonaid take to build a website?
+                    </h3>
+                    <p class="text-gray-400 text-sm font-sans pl-5">
+                        Build times are fast (usually within a few days depending on school schedule and project requirements), with continuous updates provided.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-gray-800">
+                    <h3 class="text-white font-bold text-base mb-2 flex items-center gap-2">
+                        <span class="text-cyber-green">&gt;</span> Who handles custom domain renewal?
+                    </h3>
+                    <p class="text-gray-400 text-sm font-sans pl-5">
+                        I assist in acquiring and connecting your custom domain name, while annual domain renewal remains your responsibility.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-gray-800">
+                    <h3 class="text-white font-bold text-base mb-2 flex items-center gap-2">
+                        <span class="text-cyber-green">&gt;</span> Is post-sale support provided for websites?
+                    </h3>
+                    <p class="text-gray-400 text-sm font-sans pl-5">
+                        Yes! Complete post-sale support is included to ensure your website operates seamlessly and securely.
+                    </p>
+                </div>
+
+                <div class="glass-card p-6 rounded-2xl border border-gray-800">
+                    <h3 class="text-white font-bold text-base mb-2 flex items-center gap-2">
+                        <span class="text-cyber-green">&gt;</span> Are Rio's websites mobile responsive?
+                    </h3>
+                    <p class="text-gray-400 text-sm font-sans pl-5">
+                        100%. Every single site is fully responsive across mobile smartphones, tablets, and desktop computers.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="py-16 md:py-20 px-6 border-t border-gray-800 bg-cyber-card/30 relative z-10">
+        <div class="max-w-3xl mx-auto text-center">
+            <h2 class="text-3xl font-bold text-white mb-6">Open a Secure Channel</h2>
+            <p class="text-gray-400 mb-8 text-sm md:text-base px-2">Contact Jonaid Ahmed (Rio) for custom web development services or cybersecurity discussions.</p>
+            
+            <a href="mailto:jonaidahmed789@gmail.com" class="inline-block border-2 border-cyber-green text-cyber-green px-6 md:px-8 py-3 md:py-4 rounded-full font-mono font-bold hover:bg-cyber-green hover:text-black transition-all text-sm md:text-base transform hover:scale-105 shadow-[0_0_15px_rgba(0,255,102,0.2)]">
+                Initiate Handshake (Email Me)
+            </a>
+
+            <div class="flex justify-center space-x-6 mt-12 text-2xl text-gray-500">
+                <a href="#" class="hover:text-white transition-colors transform hover:-translate-y-2"><i class="fab fa-github"></i></a>
+                <a href="#" class="hover:text-cyber-teal transition-colors transform hover:-translate-y-2"><i class="fab fa-twitter"></i></a>
+                <a href="#" class="hover:text-blue-500 transition-colors transform hover:-translate-y-2"><i class="fab fa-linkedin"></i></a>
+                <a href="#" class="hover:text-pink-500 transition-colors transform hover:-translate-y-2"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-black py-6 text-center border-t border-gray-800 relative z-10">
+        <p class="font-mono text-xs text-gray-600">
+            &copy; 2026 Jonaid Ahmed (Rio) Web Developer Portfolio. Coded in the matrix.
+        </p>
+    </footer>
+
+    <!-- JavaScript for Interactions -->
+    <script>
+        // 3D Tilt Effect
+        const tiltCards = document.querySelectorAll('.tilt-card, .tilt-element');
+        const isHoverSupported = matchMedia('(hover: hover)').matches;
+
+        if (isHoverSupported) {
+            tiltCards.forEach(card => {
+                card.addEventListener('mousemove', (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const centerX = rect.width / 2;
+                    const centerY = rect.height / 2;
+                    const rotateX = ((y - centerY) / centerY) * -10; 
+                    const rotateY = ((x - centerX) / centerX) * 10;
+                    
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale3d(1.02, 1.02, 1.02)`;
+                });
+                
+                card.addEventListener('mouseleave', () => {
+                    card.style.transform = `perspective(1000px) rotateX(0deg) rotateY(0deg) scale3d(1, 1, 1)`;
+                    card.style.transition = 'transform 0.5s ease';
+                });
+                
+                card.addEventListener('mouseenter', () => {
+                    card.style.transition = 'none';
+                });
+            });
+        }
+
+        // 3D Particles
+        tsParticles.load("tsparticles", {
+            fpsLimit: 60,
+            particles: {
+                color: { value: ["#00ff66", "#00e5ff", "#b000ff"] },
+                links: {
+                    color: "#ffffff",
+                    distance: 150,
+                    enable: true,
+                    opacity: 0.1,
+                    width: 1
+                },
+                move: {
+                    enable: true,
+                    speed: 0.8,
+                    direction: "none",
+                    random: true,
+                    straight: false,
+                    outModes: "out"
+                },
+                number: {
+                    density: { enable: true, area: 800 },
+                    value: 40
+                },
+                opacity: {
+                    value: 0.3,
+                    random: true,
+                    animation: { enable: true, speed: 1, minimumValue: 0.1 }
+                },
+                size: {
+                    value: { min: 1, max: 3 },
+                    random: true
+                }
+            },
+            interactivity: {
+                events: {
+                    onHover: { enable: true, mode: "grab" },
+                    onClick: { enable: true, mode: "push" },
+                    resize: true
+                },
+                modes: {
+                    grab: { distance: 140, links: { opacity: 0.5 } },
+                    push: { quantity: 4 }
+                }
+            },
+            detectRetina: true,
+            fullScreen: { enable: false }
+        });
+
+        // Mobile Menu
+        const mobileBtn = document.getElementById('mobile-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const mobileLinks = document.querySelectorAll('.mobile-link');
+        const navIcon = mobileBtn.querySelector('i');
+
+        mobileBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+            mobileMenu.classList.toggle('flex');
+            
+            if (mobileMenu.classList.contains('hidden')) {
+                navIcon.classList.remove('fa-times');
+                navIcon.classList.add('fa-bars');
+            } else {
+                navIcon.classList.remove('fa-bars');
+                navIcon.classList.add('fa-times');
+            }
+        });
+
+        mobileLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.add('hidden');
+                mobileMenu.classList.remove('flex');
+                navIcon.classList.remove('fa-times');
+                navIcon.classList.add('fa-bars');
+            });
+        });
+
+        // Typewriter Effect
+        const phrases = [
+            "Jonaid Ahmed | Web Developer", 
+            "Rio | Aspiring Cybersecurity Guy", 
+            "Writer & Poet", 
+            "Horror Storyteller", 
+            "Future World Traveler"
+        ];
+        
+        let currentPhrase = 0;
+        let isDeleting = false;
+        let text = '';
+        let typingSpeed = 100;
+        const typeWriterElement = document.getElementById('typewriter');
+
+        function type() {
+            const fullText = phrases[currentPhrase];
+            
+            if (isDeleting) {
+                text = fullText.substring(0, text.length - 1);
+                typingSpeed = 50;
+            } else {
+                text = fullText.substring(0, text.length + 1);
+                typingSpeed = 100;
+            }
+
+            typeWriterElement.innerHTML = text;
+
+            if (!isDeleting && text === fullText) {
+                typingSpeed = 2000; 
+                isDeleting = true;
+            } else if (isDeleting && text === '') {
+                isDeleting = false;
+                currentPhrase = (currentPhrase + 1) % phrases.length;
+                typingSpeed = 500; 
+            }
+
+            setTimeout(type, typingSpeed);
+        }
+
+        window.onload = function() {
+            type();
+        };
+
+        // Scroll Nav Effect
+        window.addEventListener('scroll', () => {
+            const nav = document.getElementById('navbar').children[0];
+            if (window.scrollY > 50) {
+                nav.classList.add('bg-black/80', 'backdrop-blur-md', 'shadow-lg', 'border-gray-800');
+                nav.classList.remove('glass-card');
+            } else {
+                nav.classList.remove('bg-black/80', 'backdrop-blur-md', 'shadow-lg', 'border-gray-800');
+                nav.classList.add('glass-card');
+            }
+        });
+    </script>
+</body>
+</html>
