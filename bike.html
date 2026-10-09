@@ -1,0 +1,550 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>The Bike Nomad • Jonaid Ahmed</title>
+    <meta name="description" content="Long roads, engine hums, mountain switchbacks, and nomadic freedom. Travel logs and motorcycle touring by Jonaid Ahmed.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Oswald:wght@400;500;600;700&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        nomad: {
+                            gold: '#F59E0B',
+                            sunset: '#FF5E1E',
+                            flame: '#D9480F',
+                            asphalt: '#0D0E12',
+                            smoke: '#181A20',
+                            card: 'rgba(24, 26, 32, 0.65)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        heading: ['Oswald', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #0A0B0E;
+            color: #F3F4F6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Sunset Atmosphere & Asphalt Texture */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 80% 10%, rgba(255, 94, 30, 0.16), transparent 45%),
+                radial-gradient(circle at 15% 45%, rgba(245, 158, 11, 0.10), transparent 50%),
+                radial-gradient(circle at 50% 90%, rgba(217, 72, 15, 0.12), transparent 55%),
+                linear-gradient(180deg, #0A0B0E 0%, #0F1117 50%, #08090C 100%);
+            z-index: -3;
+        }
+
+        /* Subtle asphalt grain overlay */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+            background-size: 28px 28px;
+            opacity: 0.35;
+            pointer-events: none;
+            z-index: -2;
+        }
+
+        /* Floating Sunset Ambient Glows */
+        .ambient-glow-1 {
+            position: fixed;
+            width: 650px;
+            height: 650px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 94, 30, 0.22) 0%, transparent 70%);
+            filter: blur(140px);
+            top: -150px;
+            right: -100px;
+            z-index: -2;
+            animation: drift1 16s ease-in-out infinite alternate;
+        }
+
+        .ambient-glow-2 {
+            position: fixed;
+            width: 550px;
+            height: 550px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.16) 0%, transparent 70%);
+            filter: blur(130px);
+            bottom: -150px;
+            left: -120px;
+            z-index: -2;
+            animation: drift2 18s ease-in-out infinite alternate;
+        }
+
+        @keyframes drift1 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(-80px, 110px) scale(1.1); }
+        }
+
+        @keyframes drift2 {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(110px, -70px) scale(1.15); }
+        }
+
+        /* Wind Line Streamers */
+        .wind-line {
+            position: absolute;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, rgba(255, 94, 30, 0.4), rgba(245, 158, 11, 0.6), transparent);
+            animation: windBlow 6s linear infinite;
+        }
+
+        @keyframes windBlow {
+            0% { transform: translateX(-100vw); opacity: 0; }
+            40% { opacity: 0.8; }
+            100% { transform: translateX(100vw); opacity: 0; }
+        }
+
+        /* Glassmorphism Styling */
+        .glass {
+            background: rgba(22, 24, 32, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.07);
+            border-top: 1px solid rgba(255, 180, 100, 0.2);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.45);
+            transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+        }
+
+        .glass:hover {
+            border-color: rgba(255, 94, 30, 0.45);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6), 0 0 30px rgba(255, 94, 30, 0.15);
+        }
+
+        /* Top Progress Indicator */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #FF5E1E, #F59E0B, #FFD166);
+            z-index: 99999;
+            transition: width 0.1s linear;
+        }
+
+        /* Flashlight Torch Follower */
+        .cursor-light {
+            position: fixed;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(255, 110, 30, 0.08) 0%, transparent 65%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition: transform 0.06s linear;
+        }
+
+        /* Reveal Trigger */
+        .reveal {
+            opacity: 0;
+            transform: translateY(45px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Route Dashed Connection */
+        .route-line {
+            background-image: repeating-linear-gradient(180deg, #F59E0B 0, #F59E0B 10px, transparent 10px, transparent 20px);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-nomad-sunset selection:text-black">
+
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Background Atmospheric Elements -->
+    <div class="ambient-glow-1"></div>
+    <div class="ambient-glow-2"></div>
+
+    <!-- Animated Wind Streaks -->
+    <div class="wind-line w-[45vw] top-[22%] left-0" style="animation-delay: 0s;"></div>
+    <div class="wind-line w-[60vw] top-[48%] left-0" style="animation-delay: 2.8s;"></div>
+    <div class="wind-line w-[35vw] top-[76%] left-0" style="animation-delay: 1.2s;"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-5 left-1/2 -translate-x-1/2 w-[min(1150px,92%)] z-50">
+        <div class="glass px-6 py-4 rounded-full flex items-center justify-between border-white/10">
+            <a href="index.html" class="flex items-center gap-2 text-zinc-400 hover:text-nomad-sunset font-mono text-sm tracking-wide transition-all group">
+                <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                <span>Portfolio</span>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-nomad-sunset animate-ping"></span>
+                <span class="font-heading tracking-[0.25em] text-lg font-bold text-white uppercase">
+                    The Bike Nomad
+                </span>
+            </div>
+
+            <a href="#stats" class="hidden sm:inline-block font-mono text-xs px-4 py-1.5 rounded-full border border-nomad-sunset/40 text-nomad-sunset hover:bg-nomad-sunset hover:text-black transition-all">
+                Telemetry
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative flex items-center justify-center pt-28 pb-16 px-6 text-center">
+        <div class="max-w-4xl mx-auto z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-nomad-sunset/30 mb-6">
+                <i class="fas fa-compass text-nomad-sunset text-xs animate-spin" style="animation-duration: 9s;"></i>
+                <span class="font-mono text-xs text-amber-300 uppercase tracking-[0.25em]">Endless Horizon Protocol</span>
+            </div>
+
+            <h1 class="font-heading text-6xl sm:text-7xl md:text-9xl uppercase font-extrabold tracking-tight leading-[0.92] mb-6">
+                Raw Roads <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-nomad-sunset via-nomad-gold to-yellow-200">Pure Freedom</span>
+            </h1>
+
+            <p class="text-zinc-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+                Chasing sunrises past switchbacks, sleeping under stars beside alpine rivers, and leaving comfort behind for the engine roar.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#routes" class="px-8 py-4 rounded-full bg-gradient-to-r from-nomad-sunset to-nomad-gold text-black font-heading tracking-wider uppercase font-bold text-lg hover:shadow-[0_0_35px_rgba(255,94,30,0.45)] hover:-translate-y-1 transition-all">
+                    Explore Routes <i class="fas fa-road ml-2 text-sm"></i>
+                </a>
+                <a href="#machine" class="px-8 py-4 rounded-full glass font-heading tracking-wider uppercase font-semibold text-lg text-white hover:bg-white/10 hover:border-nomad-sunset/60 transition-all">
+                    The Setup
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-500 flex flex-col items-center gap-2">
+            <span>SCROLL DOWN</span>
+            <i class="fas fa-chevron-down animate-bounce text-nomad-sunset"></i>
+        </div>
+    </section>
+
+    <!-- Telemetry Statistics -->
+    <section id="stats" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div class="glass rounded-3xl p-6 text-center border-nomad-sunset/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Distance Done</div>
+                <div class="font-heading text-4xl sm:text-5xl font-bold text-amber-400">14,280</div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Kilometers Clocked</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-nomad-sunset/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Peak Elevation</div>
+                <div class="font-heading text-4xl sm:text-5xl font-bold text-nomad-sunset">5,359<span class="text-2xl font-sans">m</span></div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Khardung La Pass</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-nomad-sunset/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Campfires Lit</div>
+                <div class="font-heading text-4xl sm:text-5xl font-bold text-amber-400">84</div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Wild Pitches</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-nomad-sunset/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Punctures Fixed</div>
+                <div class="font-heading text-4xl sm:text-5xl font-bold text-nomad-sunset">11</div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Roadside Repairs</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Expedition Routes Timeline -->
+    <section id="routes" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs text-nomad-sunset tracking-[0.3em] uppercase mb-3">Waypoint Trajectories</p>
+            <h2 class="font-heading text-4xl sm:text-6xl uppercase font-bold tracking-tight text-white">Documented Routes</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base mt-3">From winding Himalayan ridge-lines to sunset coastal corridors.</p>
+        </div>
+
+        <div class="relative">
+            <!-- Central connecting dashed line on desktop -->
+            <div class="hidden md:block absolute left-1/2 -translate-x-1/2 top-4 bottom-4 w-0.5 route-line opacity-40"></div>
+
+            <div class="space-y-12">
+                <!-- Route Item 1 -->
+                <div class="flex flex-col md:flex-row items-center gap-8 group">
+                    <div class="w-full md:w-1/2 md:text-right">
+                        <div class="glass rounded-3xl p-8 transition-transform group-hover:-translate-y-1">
+                            <span class="inline-block font-mono text-xs text-amber-400 mb-2 px-3 py-1 rounded-full bg-amber-400/10">EXPEDITION #01</span>
+                            <h3 class="font-heading text-3xl uppercase font-bold text-white mb-2">Manali to Leh Circuit</h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-4">Crossing high-altitude cols, frozen gravel crossings, and high-desert plateaus where altitude makes every breath earned.</p>
+                            <div class="flex flex-wrap md:justify-end gap-2 text-xs font-mono text-zinc-400">
+                                <span><i class="fas fa-tachometer-alt text-nomad-sunset mr-1"></i>473 KM</span>
+                                <span>•</span>
+                                <span><i class="fas fa-mountain text-nomad-sunset mr-1"></i>5 Mountain Passes</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center justify-center w-12 h-12 rounded-full glass border-nomad-sunset text-nomad-sunset z-10 shadow-[0_0_20px_rgba(255,94,30,0.3)]">
+                        <i class="fas fa-flag-checkered"></i>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="glass rounded-3xl p-6 border-white/5 overflow-hidden">
+                            <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3 border-b border-white/5 pb-2">
+                                <span>STATUS: COMPLETED</span>
+                                <span>OCTOBER RUN</span>
+                            </div>
+                            <blockquote class="italic text-zinc-300 text-sm">"The road ends where the courage wavers. Beyond More Plains, you belong entirely to the wind."</blockquote>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Route Item 2 -->
+                <div class="flex flex-col md:flex-row-reverse items-center gap-8 group">
+                    <div class="w-full md:w-1/2 md:text-left">
+                        <div class="glass rounded-3xl p-8 transition-transform group-hover:-translate-y-1">
+                            <span class="inline-block font-mono text-xs text-nomad-sunset mb-2 px-3 py-1 rounded-full bg-nomad-sunset/10">EXPEDITION #02</span>
+                            <h3 class="font-heading text-3xl uppercase font-bold text-white mb-2">Spiti Valley Loop</h3>
+                            <p class="text-zinc-400 text-sm leading-relaxed mb-4">Riverbed trails, cliff-hanging roads, and cold monasteries perched against jagged lunar peaks.</p>
+                            <div class="flex flex-wrap gap-2 text-xs font-mono text-zinc-400">
+                                <span><i class="fas fa-tachometer-alt text-nomad-sunset mr-1"></i>980 KM</span>
+                                <span>•</span>
+                                <span><i class="fas fa-gas-pump text-nomad-sunset mr-1"></i>Limited Fuel</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="hidden md:flex items-center justify-center w-12 h-12 rounded-full glass border-amber-400 text-amber-400 z-10 shadow-[0_0_20px_rgba(245,158,11,0.3)]">
+                        <i class="fas fa-compass"></i>
+                    </div>
+                    <div class="w-full md:w-1/2">
+                        <div class="glass rounded-3xl p-6 border-white/5">
+                            <div class="flex items-center justify-between text-xs font-mono text-zinc-400 mb-3 border-b border-white/5 pb-2">
+                                <span>STATUS: ARCHIVED</span>
+                                <span>SOLO RUN</span>
+                            </div>
+                            <blockquote class="italic text-zinc-300 text-sm">"No network coverage. Just a hot exhaust pipe drying gloves in sub-zero dusk."</blockquote>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Touring Rig & Setup Section -->
+    <section id="machine" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="glass rounded-[38px] p-8 md:p-14 border-nomad-sunset/30 relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-nomad-sunset/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="w-full lg:w-1/2">
+                    <p class="font-mono text-xs uppercase tracking-[0.3em] text-nomad-sunset mb-2">The Setup & Architecture</p>
+                    <h2 class="font-heading text-4xl md:text-5xl uppercase font-bold text-white mb-6">
+                        Minimalist Touring Cockpit
+                    </h2>
+                    <p class="text-zinc-300 text-sm md:text-base leading-relaxed mb-6 font-light">
+                        Every kilogram packed is paid for in handling on gravel switchbacks. Touring setup revolves around modular durability, quick roadside diagnostics, and weatherproofing.
+                    </p>
+
+                    <div class="grid grid-cols-2 gap-4 font-mono text-xs text-zinc-300">
+                        <div class="glass p-3 rounded-2xl flex items-center gap-3">
+                            <i class="fas fa-wrench text-nomad-sunset"></i>
+                            <span>Modular Toolkit</span>
+                        </div>
+                        <div class="glass p-3 rounded-2xl flex items-center gap-3">
+                            <i class="fas fa-campground text-amber-400"></i>
+                            <span>Ultralight Bivvy Tent</span>
+                        </div>
+                        <div class="glass p-3 rounded-2xl flex items-center gap-3">
+                            <i class="fas fa-map-marked-alt text-nomad-sunset"></i>
+                            <span>Offline Topo GPS</span>
+                        </div>
+                        <div class="glass p-3 rounded-2xl flex items-center gap-3">
+                            <i class="fas fa-shield-alt text-amber-400"></i>
+                            <span>Crash Cage Rig</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2">
+                    <div class="glass rounded-3xl p-8 border-white/10 space-y-5">
+                        <div class="flex items-center justify-between border-b border-white/5 pb-3">
+                            <span class="font-mono text-xs text-zinc-400">CLASS</span>
+                            <span class="font-bold text-white">Dual-Sport Adventure</span>
+                        </div>
+                        <div class="flex items-center justify-between border-b border-white/5 pb-3">
+                            <span class="font-mono text-xs text-zinc-400">TIRES</span>
+                            <span class="font-bold text-amber-300">50/50 Dual Purpose Knobbies</span>
+                        </div>
+                        <div class="flex items-center justify-between border-b border-white/5 pb-3">
+                            <span class="font-mono text-xs text-zinc-400">LUGGAGE CAPACITY</span>
+                            <span class="font-bold text-white">48L Waterproof Drybags</span>
+                        </div>
+                        <div class="flex items-center justify-between">
+                            <span class="font-mono text-xs text-zinc-400">PHILOSOPHY</span>
+                            <span class="font-bold text-nomad-sunset">Fixable with 3 Wrenches</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Dream Destinations -->
+    <section class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs text-amber-400 tracking-[0.3em] uppercase mb-3">On The Radar</p>
+            <h2 class="font-heading text-4xl sm:text-6xl uppercase font-bold tracking-tight text-white">Dream Expeditions</h2>
+            <p class="text-zinc-400 max-w-md mx-auto text-sm mt-3">High passes and coastal straits waiting for fresh tread marks.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-nomad-sunset/10 flex items-center justify-center text-nomad-sunset text-xl mb-6 group-hover:bg-nomad-sunset group-hover:text-black transition-all">
+                    <i class="fas fa-snowflake"></i>
+                </div>
+                <h3 class="font-heading text-2xl uppercase font-bold text-white mb-2">Zanskar Gorge</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">Navigating through sheer granite walls and glacier meltwater crossings.</p>
+                <span class="font-mono text-xs text-amber-300">TARGET: SUMMER 2027</span>
+            </div>
+
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-amber-400/10 flex items-center justify-center text-amber-400 text-xl mb-6 group-hover:bg-amber-400 group-hover:text-black transition-all">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <h3 class="font-heading text-2xl uppercase font-bold text-white mb-2">Rann of Kutch</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">Endless white salt flats under moonlight horizons and desert headwinds.</p>
+                <span class="font-mono text-xs text-nomad-sunset">TARGET: WINTER 2027</span>
+            </div>
+
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-nomad-sunset/10 flex items-center justify-center text-nomad-sunset text-xl mb-6 group-hover:bg-nomad-sunset group-hover:text-black transition-all">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <h3 class="font-heading text-2xl uppercase font-bold text-white mb-2">Western Ghats Gap</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">Dense rainforest monsoon hairpins enveloped in perpetual mist.</p>
+                <span class="font-mono text-xs text-amber-300">TARGET: MONSOON 2028</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Manifesto Quote -->
+    <section class="py-28 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="font-heading text-4xl sm:text-6xl md:text-7xl uppercase font-bold tracking-tight text-white leading-tight">
+                "You do not travel to see things. <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-nomad-sunset to-nomad-gold">You travel to feel alive again.</span>"
+            </p>
+            <div class="mt-8 font-mono text-xs tracking-widest text-zinc-500 uppercase">
+                // The Nomad Code
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 text-center border-t border-white/10 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+                <a href="index.html" class="font-heading text-2xl uppercase font-bold tracking-wider text-white">
+                    Jonaid Ahmed
+                </a>
+                <p class="font-mono text-xs text-zinc-500 mt-1">Coded in the matrix. Ridden on the gravel.</p>
+            </div>
+            <div class="flex items-center gap-6 text-zinc-400 font-mono text-xs">
+                <a href="index.html" class="hover:text-nomad-sunset transition-colors">Home</a>
+                <a href="mountains.html" class="hover:text-nomad-sunset transition-colors">Mountains</a>
+                <a href="poetry.html" class="hover:text-nomad-sunset transition-colors">Poetry</a>
+            </div>
+            <p class="font-mono text-xs text-zinc-600">
+                &copy; 2026 Jonaid Ahmed. Keep both wheels grounded.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Reading Progress Indicator
+        const progressBar = document.getElementById("progress-bar");
+        window.addEventListener("scroll", () => {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / total) * 100;
+            progressBar.style.width = progress + "%";
+        });
+
+        // Intersection Observer for Smooth Reveal Transitions
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll("section, article, .glass").forEach(el => {
+            el.classList.add("reveal");
+            observer.observe(el);
+        });
+
+        // Mouse Flashlight Tracker
+        const light = document.createElement("div");
+        light.className = "cursor-light";
+        document.body.appendChild(light);
+
+        document.addEventListener("mousemove", (e) => {
+            light.style.left = e.clientX + "px";
+            light.style.top = e.clientY + "px";
+        });
+
+        // 3D Tilt Interaction for Glass Cards
+        const isHoverDevice = matchMedia('(hover: hover)').matches;
+        if (isHoverDevice) {
+            document.querySelectorAll(".glass").forEach(card => {
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateY = ((x / rect.width) - 0.5) * 10;
+                    const rotateX = ((y / rect.height) - 0.5) * -10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "";
+                });
+            });
+        }
+    </script>
+</body>
+</html>
