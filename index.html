@@ -1,3 +1,4 @@
+<!-- index.html -->
 <!DOCTYPE html>
 <html lang="en" class="scroll-smooth">
 <head>
@@ -114,29 +115,39 @@
                 radial-gradient(circle at 85% 30%, rgba(176, 0, 255, 0.08) 0%, transparent 25%);
         }
 
+        /* Optimized Backgrounds for Better Visibility & Contrast */
         .bg-mountains {
-            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.98), rgba(10, 10, 15, 0.75), rgba(10, 10, 15, 0.98)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop');
+            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.40), rgba(10, 10, 15, 0.85)), url('https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
         }
         .bg-space {
-            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.95)), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop');
+            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.60), rgba(10, 10, 15, 0.85)), url('https://images.unsplash.com/photo-1462331940025-496dfbfc7564?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
         }
         .bg-forest {
-            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.98), rgba(10, 10, 15, 0.85), rgba(10, 10, 15, 0.98)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2000&auto=format&fit=crop');
+            background-image: linear-gradient(to bottom, rgba(10, 10, 15, 0.90), rgba(10, 10, 15, 0.55), rgba(10, 10, 15, 0.90)), url('https://images.unsplash.com/photo-1448375240586-882707db888b?q=80&w=2000&auto=format&fit=crop');
             background-size: cover;
             background-attachment: fixed;
             background-position: center;
+        }
+
+        /* Mobile Adjustments for Backgrounds */
+        @media (max-width: 768px) {
+            .bg-mountains, .bg-space, .bg-forest {
+                background-attachment: scroll; /* Fixes iOS fixed background zoom bug */
+                background-position: center 20%; /* Better focal point cropping on mobile */
+            }
         }
 
         ::-webkit-scrollbar { width: 8px; }
         ::-webkit-scrollbar-track { background: #0a0a0f; }
         ::-webkit-scrollbar-thumb { background: #00ff66; border-radius: 4px; }
 
+        /* Standard Developer Glass Card (Used in Nav, Services, etc.) */
         .glass-card {
             background: rgba(18, 18, 26, 0.7);
             backdrop-filter: blur(10px);
@@ -154,6 +165,33 @@
         .glass-card > * {
             transform: translateZ(30px);
             transition: transform 0.3s ease;
+        }
+
+        /* iOS-Style Glassmorphism for Passion Cards Only */
+        .passion-glass-card {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-top: 1px solid rgba(255, 255, 255, 0.15);
+            border-left: 1px solid rgba(255, 255, 255, 0.15);
+            box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.3);
+            transition: background 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+            transform-style: preserve-3d;
+            will-change: transform;
+            border-radius: 1rem;
+        }
+        
+        @media (prefers-reduced-motion: no-preference) {
+            .passion-glass-card:hover {
+                background: rgba(255, 255, 255, 0.08);
+                border-color: rgba(255, 255, 255, 0.3);
+                box-shadow: 0 12px 40px 0 rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(255, 255, 255, 0.05);
+            }
+            .passion-glass-card > * {
+                transform: translateZ(30px);
+                transition: transform 0.3s ease;
+            }
         }
 
         .cursor::after {
@@ -354,40 +392,44 @@
             <h2 class="text-3xl md:text-4xl font-bold text-white mb-12 text-center">What Drives Jonaid Ahmed</h2>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
-                    <div class="text-3xl md:text-4xl text-cyber-teal mb-4"><i class="fas fa-feather-alt"></i></div>
-                    <h3 class="text-lg md:text-xl font-bold text-white mb-3">Poetry & Writing</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Putting chaos into words. Writing poetry to express the unspoken and tell engaging stories.</p>
-                </div>
+                <!-- Poetry Card transformed into a link -->
+                <a href="poetry.html" aria-label="Read Poetry Collection" class="passion-glass-card tilt-card p-6 md:p-8 block no-underline group">
+                    <div class="text-3xl md:text-4xl text-cyber-teal mb-4 group-hover:scale-110 transition-transform"><i class="fas fa-feather-alt"></i></div>
+                    <h3 class="text-lg md:text-xl font-bold text-white mb-3 flex items-center justify-between">
+                        Poetry & Writing 
+                        <i class="fas fa-arrow-right text-sm opacity-0 group-hover:opacity-100 transition-opacity text-cyber-teal"></i>
+                    </h3>
+                    <p class="text-gray-300 text-sm leading-relaxed">Putting chaos into words. Writing poetry to express the unspoken and tell engaging stories. Click to read.</p>
+                </a>
                 
-                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                <div class="passion-glass-card tilt-card p-6 md:p-8">
                     <div class="text-3xl md:text-4xl text-yellow-500 mb-4"><i class="fas fa-motorcycle"></i></div>
                     <h3 class="text-lg md:text-xl font-bold text-white mb-3">The Bike Nomad</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Traveling the world on a bike, feeling the wind, chasing horizons, and experiencing raw freedom.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Traveling the world on a bike, feeling the wind, chasing horizons, and experiencing raw freedom.</p>
                 </div>
 
-                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                <div class="passion-glass-card tilt-card p-6 md:p-8">
                     <div class="text-3xl md:text-4xl text-green-500 mb-4"><i class="fas fa-mountain"></i></div>
                     <h3 class="text-lg md:text-xl font-bold text-white mb-3">Mountain Calling</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">A deep love for nature and towering peaks where peace and perspective reign.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">A deep love for nature and towering peaks where peace and perspective reign.</p>
                 </div>
 
-                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                <div class="passion-glass-card tilt-card p-6 md:p-8">
                     <div class="text-3xl md:text-4xl text-red-500 mb-4"><i class="fas fa-ghost"></i></div>
                     <h3 class="text-lg md:text-xl font-bold text-white mb-3">Horror Storytelling</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Crafting fear and suspense through mystery genres and horror stories.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Crafting fear and suspense through mystery genres and horror stories.</p>
                 </div>
 
-                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                <div class="passion-glass-card tilt-card p-6 md:p-8">
                     <div class="text-3xl md:text-4xl text-purple-500 mb-4"><i class="fas fa-user-astronaut"></i></div>
                     <h3 class="text-lg md:text-xl font-bold text-white mb-3">Cosmos & Thought</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Fascinated by space, the universe, and deep intellectual discussions about reality.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Fascinated by space, the universe, and deep intellectual discussions about reality.</p>
                 </div>
 
-                <div class="glass-card tilt-card p-6 md:p-8 rounded-2xl">
+                <div class="passion-glass-card tilt-card p-6 md:p-8">
                     <div class="text-3xl md:text-4xl text-emerald-400 mb-4"><i class="fas fa-seedling"></i></div>
                     <h3 class="text-lg md:text-xl font-bold text-white mb-3">Gardening</h3>
-                    <p class="text-gray-400 text-sm leading-relaxed">Grounding in nature. Nurturing life from seeds teaches patience required for web code.</p>
+                    <p class="text-gray-300 text-sm leading-relaxed">Grounding in nature. Nurturing life from seeds teaches patience required for web code.</p>
                 </div>
             </div>
         </div>
@@ -505,7 +547,7 @@
 
     <!-- JavaScript for Interactions -->
     <script>
-        // 3D Tilt Effect
+        // 3D Tilt Effect - Includes the new passion-glass-card without modifying the JS structure
         const tiltCards = document.querySelectorAll('.tilt-card, .tilt-element');
         const isHoverSupported = matchMedia('(hover: hover)').matches;
 
