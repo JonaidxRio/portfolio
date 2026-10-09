@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Gardening & Soil • Jonaid Ahmed</title>
+    <meta name="description" content="Nurturing life from seed, soil microbiology, botany journals, and the patient art of gardening by Jonaid Ahmed (Rio).">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,500;0,600;0,700;1,400;1,600&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        botanic: {
+                            emerald: '#10B981',
+                            leaf: '#34D399',
+                            sprout: '#A7F3D0',
+                            moss: '#064E3B',
+                            soil: '#181512',
+                            amber: '#F59E0B',
+                            sun: '#FDE047',
+                            dark: '#070C08'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['"Playfair Display"', 'serif'],
+                        mono: ['"Space Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #070C08;
+            color: #E2E8F0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Earthy Forest & Morning Sunlight Atmosphere */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 80% 15%, rgba(253, 224, 71, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 20% 50%, rgba(16, 185, 129, 0.14) 0%, transparent 50%),
+                radial-gradient(circle at 60% 85%, rgba(6, 78, 59, 0.25) 0%, transparent 60%),
+                linear-gradient(180deg, #070C08 0%, #0D1610 50%, #050906 100%);
+            z-index: -4;
+        }
+
+        /* Subtle Organic Texture */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: radial-gradient(rgba(167, 243, 208, 0.05) 1px, transparent 1px);
+            background-size: 32px 32px;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -3;
+        }
+
+        /* Floating Golden Pollen and Spores */
+        .pollen-orb {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(16, 185, 129, 0.15) 0%, transparent 70%);
+            filter: blur(120px);
+            top: -100px;
+            right: 10%;
+            z-index: -2;
+            animation: sporeFloat 18s ease-in-out infinite alternate;
+        }
+
+        .sunlight-beam {
+            position: fixed;
+            width: 450px;
+            height: 450px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(253, 224, 71, 0.10) 0%, transparent 70%);
+            filter: blur(130px);
+            bottom: -100px;
+            left: 5%;
+            z-index: -2;
+            animation: sunBreathe 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes sporeFloat {
+            0% { transform: translateY(0) translateX(0) scale(1); }
+            100% { transform: translateY(80px) translateX(-60px) scale(1.1); }
+        }
+
+        @keyframes sunBreathe {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(-70px) scale(1.15); }
+        }
+
+        /* Botanical Glassmorphism */
+        .glass {
+            background: rgba(14, 24, 17, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(52, 211, 153, 0.3);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
+            transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+        }
+
+        .glass:hover {
+            border-color: rgba(52, 211, 153, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(16, 185, 129, 0.18);
+        }
+
+        /* Reading Progress Indicator */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #10B981, #34D399, #FDE047);
+            z-index: 99999;
+            transition: width 0.1s linear;
+        }
+
+        /* Sunlight Cursor Follower */
+        .cursor-light {
+            position: fixed;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(52, 211, 153, 0.08) 0%, transparent 65%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition: transform 0.06s linear;
+        }
+
+        /* Scroll Reveal Effect */
+        .reveal {
+            opacity: 0;
+            transform: translateY(45px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-botanic-emerald selection:text-black">
+
+    <!-- Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Ambient Sunlight and Spore Blurs -->
+    <div class="pollen-orb"></div>
+    <div class="sunlight-beam"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-5 left-1/2 -translate-x-1/2 w-[min(1150px,92%)] z-50">
+        <div class="glass px-6 py-4 rounded-full flex items-center justify-between border-white/5">
+            <a href="index.html" class="flex items-center gap-2 text-zinc-400 hover:text-botanic-leaf font-mono text-sm tracking-wide transition-all group">
+                <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                <span>Portfolio</span>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-botanic-leaf animate-pulse"></span>
+                <span class="font-serif tracking-[0.2em] text-sm sm:text-base font-bold text-white uppercase">
+                    Soil & Flora
+                </span>
+            </div>
+
+            <a href="#calendar" class="hidden sm:inline-block font-mono text-xs px-4 py-1.5 rounded-full border border-botanic-leaf/40 text-botanic-leaf hover:bg-botanic-leaf hover:text-black transition-all">
+                Plant Calendar
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative flex items-center justify-center pt-28 pb-16 px-6 text-center">
+        <div class="max-w-4xl mx-auto z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-botanic-leaf/30 mb-6">
+                <i class="fas fa-seedling text-botanic-leaf text-xs"></i>
+                <span class="font-mono text-xs text-botanic-sprout uppercase tracking-[0.25em]">Grounding Protocol • Botany Journal</span>
+            </div>
+
+            <h1 class="font-serif text-5xl sm:text-7xl md:text-9xl font-bold tracking-tight leading-[0.95] mb-6">
+                Rooted In <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-400 via-botanic-leaf to-yellow-200">The Living Earth</span>
+            </h1>
+
+            <p class="text-zinc-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+                Nurturing life from seed teaches the stillness that screen terminals cannot give. Here, patience is quiet, rain is honest, and every leaf earns its place.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#journal" class="px-8 py-4 rounded-full bg-gradient-to-r from-botanic-emerald to-botanic-leaf text-black font-serif tracking-wider uppercase font-bold text-base hover:shadow-[0_0_35px_rgba(52,211,153,0.45)] hover:-translate-y-1 transition-all">
+                    Garden Journal <i class="fas fa-leaf ml-2 text-xs"></i>
+                </a>
+                <a href="#calendar" class="px-8 py-4 rounded-full glass font-serif tracking-wider uppercase font-semibold text-base text-zinc-300 hover:bg-white/10 hover:border-botanic-leaf/60 transition-all">
+                    Planting Seasons
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-500 flex flex-col items-center gap-2">
+            <span>OBSERVE ROOTS</span>
+            <i class="fas fa-chevron-down animate-bounce text-botanic-leaf"></i>
+        </div>
+    </section>
+
+    <!-- Cultivation Metrics -->
+    <section class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div class="glass rounded-3xl p-6 text-center border-botanic-leaf/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Species Cultivated</div>
+                <div class="font-serif text-4xl sm:text-5xl font-bold text-botanic-leaf">38+</div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Herbs, Trees & Flowers</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-botanic-leaf/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Germination Rate</div>
+                <div class="font-serif text-4xl sm:text-5xl font-bold text-amber-300">92<span class="text-2xl font-sans">%</span></div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Native Soil Mixes</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-botanic-leaf/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Compost Batches</div>
+                <div class="font-serif text-4xl sm:text-5xl font-bold text-botanic-sprout">140<span class="text-2xl font-sans">kg</span></div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Organic Black Gold</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-botanic-leaf/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Sunlight Hours</div>
+                <div class="font-serif text-4xl sm:text-5xl font-bold text-yellow-300">6.5<span class="text-2xl font-sans">h</span></div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Daily Solar Average</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Garden Journal Dispatches -->
+    <section id="journal" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs text-botanic-leaf tracking-[0.3em] uppercase mb-3">SOIL DISPATCHES</p>
+            <h2 class="font-serif text-4xl sm:text-6xl uppercase font-bold tracking-tight text-white">The Plant Diary</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base mt-3">Observations on pruning, soil composition, and quiet mornings among the leaves.</p>
+        </div>
+
+        <div class="space-y-12">
+            <!-- Entry 1 -->
+            <article class="glass rounded-[35px] p-8 md:p-14 transition duration-500 hover:scale-[1.01] border-botanic-leaf/30">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                    <div>
+                        <span class="font-mono text-xs text-botanic-leaf uppercase tracking-widest">LOG #01 • MONSOON TRANSITION</span>
+                        <h3 class="font-serif text-3xl sm:text-4xl text-white font-bold mt-1">The First Shoot from Native Assam Soil</h3>
+                    </div>
+                    <div class="flex gap-2 font-mono text-xs">
+                        <span class="glass px-3 py-1 rounded-full text-botanic-sprout"><i class="fas fa-tint mr-1"></i> High Humidity</span>
+                        <span class="glass px-3 py-1 rounded-full text-zinc-400"><i class="fas fa-sun mr-1"></i> Filtered Dawn</span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 text-zinc-300 text-base leading-relaxed space-y-4 font-light">
+                        <p>
+                            You cannot rush a seed. You can provide rich vermicompost, balanced moisture, and gentle morning sunlight, but the actual decision to break the husk belongs entirely to the plant.
+                        </p>
+                        <p>
+                            In web development and cybersecurity, we are obsessed with instant terminals and microsecond execution. Working the soil is the antidote. It reminds you that the most resilient roots take months of dark, invisible preparation before they ever show green to the world.
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 border-white/5 font-mono text-xs text-zinc-400 space-y-3">
+                        <div class="text-botanic-leaf uppercase tracking-wider font-bold mb-2">Botany Profile</div>
+                        <div class="flex justify-between"><span>SPECIES:</span> <span class="text-white">Jasminum sambac</span></div>
+                        <div class="flex justify-between"><span>SOIL TYPE:</span> <span class="text-white">Loamy Alluvial + Leaf Mold</span></div>
+                        <div class="flex justify-between"><span>PH LEVEL:</span> <span class="text-white">6.4 (Slightly Acidic)</span></div>
+                        <div class="flex justify-between"><span>CYCLE:</span> <span class="text-botanic-leaf">Active Vegetative</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Entry 2 -->
+            <article class="glass rounded-[35px] p-8 md:p-14 transition duration-500 hover:scale-[1.01] border-botanic-leaf/30">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                    <div>
+                        <span class="font-mono text-xs text-amber-300 uppercase tracking-widest">LOG #02 • PRUNING & REBIRTH</span>
+                        <h3 class="font-serif text-3xl sm:text-4xl text-white font-bold mt-1">Why Pruning is Necessary for Growth</h3>
+                    </div>
+                    <div class="flex gap-2 font-mono text-xs">
+                        <span class="glass px-3 py-1 rounded-full text-amber-200"><i class="fas fa-cut mr-1"></i> Selective Cut</span>
+                        <span class="glass px-3 py-1 rounded-full text-zinc-400"><i class="fas fa-wind mr-1"></i> Aeration</span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 text-zinc-300 text-base leading-relaxed space-y-4 font-light">
+                        <p>
+                            Cutting healthy-looking branches feels wrong until you see the result three weeks later. Removing dead wood and crowded center stems allows sunlight to penetrate deep into the heart of the canopy.
+                        </p>
+                        <p>
+                            Just like refactoring hundreds of lines of bloated code: to make something flourish, you have to be brave enough to trim what isn't serving its true purpose.
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 border-white/5 font-mono text-xs text-zinc-400 space-y-3">
+                        <div class="text-amber-300 uppercase tracking-wider font-bold mb-2">Botany Profile</div>
+                        <div class="flex justify-between"><span>FOCUS:</span> <span class="text-white">Canopy Aeration</span></div>
+                        <div class="flex justify-between"><span>TECHNIQUE:</span> <span class="text-white">45-Degree Node Pruning</span></div>
+                        <div class="flex justify-between"><span>RECOVERY:</span> <span class="text-white">18 Days to New Nodes</span></div>
+                        <div class="flex justify-between"><span>RESULT:</span> <span class="text-amber-300">Doubled Flower Yield</span></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Seasonal Planting Calendar -->
+    <section id="calendar" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs text-botanic-sprout tracking-[0.3em] uppercase mb-3">CYCLES OF SUN & RAIN</p>
+            <h2 class="font-serif text-4xl sm:text-6xl uppercase font-bold tracking-tight text-white">Planting Calendar</h2>
+            <p class="text-zinc-400 max-w-md mx-auto text-sm mt-3">Working in harmony with the weather rather than resisting it.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-botanic-leaf text-xl mb-6 group-hover:bg-botanic-leaf group-hover:text-black transition-all">
+                    <i class="fas fa-cloud-showers-heavy"></i>
+                </div>
+                <h3 class="font-serif text-2xl uppercase font-bold text-white mb-2">Monsoon Flush</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">Hardwood cuttings, ferns, tropical foliage, and natural root division in high humidity.</p>
+                <span class="font-mono text-xs text-botanic-leaf">WINDOW: JUNE – AUGUST</span>
+            </div>
+
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-amber-500/10 flex items-center justify-center text-amber-400 text-xl mb-6 group-hover:bg-amber-400 group-hover:text-black transition-all">
+                    <i class="fas fa-snowflake"></i>
+                </div>
+                <h3 class="font-serif text-2xl uppercase font-bold text-white mb-2">Winter Greens</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">Brassicas, fresh herbs, root vegetables, and preparing cold mulch blankets for trees.</p>
+                <span class="font-mono text-xs text-amber-300">WINDOW: OCTOBER – JANUARY</span>
+            </div>
+
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-yellow-500/10 flex items-center justify-center text-yellow-300 text-xl mb-6 group-hover:bg-yellow-300 group-hover:text-black transition-all">
+                    <i class="fas fa-sun"></i>
+                </div>
+                <h3 class="font-serif text-2xl uppercase font-bold text-white mb-2">Spring Awakening</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">Seed starting, repotting root-bound perennials, and top-dressing beds with compost.</p>
+                <span class="font-mono text-xs text-yellow-200">WINDOW: FEBRUARY – APRIL</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Botanical Philosophy Quote -->
+    <section class="py-28 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="font-serif text-3xl sm:text-5xl md:text-6xl font-normal tracking-tight text-white leading-tight italic">
+                "To plant a garden is to believe in <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-botanic-leaf font-semibold not-italic">tomorrow."</span>
+            </p>
+            <div class="mt-8 font-mono text-xs tracking-widest text-zinc-500 uppercase">
+                // Audrey Hepburn • Soil Creed
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 text-center border-t border-white/10 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+                <a href="index.html" class="font-serif text-2xl font-bold tracking-wider text-white">
+                    Jonaid Ahmed
+                </a>
+                <p class="font-mono text-xs text-zinc-500 mt-1">Coded in the matrix. Grounded in the garden.</p>
+            </div>
+            <div class="flex items-center gap-6 text-zinc-400 font-mono text-xs">
+                <a href="index.html" class="hover:text-botanic-leaf transition-colors">Home</a>
+                <a href="poetry.html" class="hover:text-botanic-leaf transition-colors">Poetry</a>
+                <a href="mountains.html" class="hover:text-botanic-leaf transition-colors">Mountains</a>
+                <a href="bike.html" class="hover:text-botanic-leaf transition-colors">The Bike Nomad</a>
+            </div>
+            <p class="font-mono text-xs text-zinc-600">
+                &copy; 2026 Jonaid Ahmed. Water your curiosity daily.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Reading Progress Indicator
+        const progressBar = document.getElementById("progress-bar");
+        window.addEventListener("scroll", () => {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / total) * 100;
+            progressBar.style.width = progress + "%";
+        });
+
+        // Intersection Observer for Smooth Reveal Transitions
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll("section, article, .glass").forEach(el => {
+            el.classList.add("reveal");
+            observer.observe(el);
+        });
+
+        // Sunlight Cursor Follower
+        const light = document.createElement("div");
+        light.className = "cursor-light";
+        document.body.appendChild(light);
+
+        document.addEventListener("mousemove", (e) => {
+            light.style.left = e.clientX + "px";
+            light.style.top = e.clientY + "px";
+        });
+
+        // 3D Glass Tilt
+        const isHoverDevice = matchMedia('(hover: hover)').matches;
+        if (isHoverDevice) {
+            document.querySelectorAll(".glass").forEach(card => {
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateY = ((x / rect.width) - 0.5) * 10;
+                    const rotateX = ((y / rect.height) - 0.5) * -10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "";
+                });
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Horror Storytelling • Jonaid Ahmed</title>
+    <meta name="description" content="Psychological suspense, paranormal mysteries, and chilling dark fiction crafted by Jonaid Ahmed (Rio).">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel+Decorative:wght@700;900&family=Special+Elite&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        horror: {
+                            crimson: '#E11D48',
+                            blood: '#991B1B',
+                            darkblood: '#450A0A',
+                            abyss: '#030305',
+                            charcoal: '#0A0A0E',
+                            bone: '#E2E8F0',
+                            faded: '#71717A'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        gothic: ['"Cinzel Decorative"', 'serif'],
+                        typewriter: ['"Special Elite"', 'monospace'],
+                        mono: ['"Space Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #030305;
+            color: #E2E8F0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Ambient Horror Atmosphere */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 80% 20%, rgba(153, 27, 27, 0.15) 0%, transparent 45%),
+                radial-gradient(circle at 20% 70%, rgba(225, 29, 72, 0.08) 0%, transparent 50%),
+                radial-gradient(circle at 50% 100%, rgba(69, 10, 10, 0.25) 0%, transparent 60%),
+                linear-gradient(180deg, #030305 0%, #08070B 50%, #020203 100%);
+            z-index: -4;
+        }
+
+        /* Cinematic Scanline Overlay */
+        .scanlines {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 99;
+            background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.25) 50%);
+            background-size: 100% 4px;
+            opacity: 0.35;
+        }
+
+        /* Fog & Shadow Layer */
+        .shadow-mist {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.35;
+            background: radial-gradient(ellipse at 50% 40%, rgba(20, 10, 15, 0.7) 0%, transparent 75%);
+            filter: blur(60px);
+            animation: breathe 14s ease-in-out infinite alternate;
+        }
+
+        @keyframes breathe {
+            0% { transform: scale(1); opacity: 0.25; }
+            100% { transform: scale(1.1); opacity: 0.45; }
+        }
+
+        /* Atmospheric Blood Glitch Animation */
+        .glitch {
+            position: relative;
+            display: inline-block;
+        }
+
+        .glitch::before,
+        .glitch::after {
+            content: attr(data-text);
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            clip: rect(0, 0, 0, 0);
+        }
+
+        .glitch:hover::before {
+            left: -2px;
+            text-shadow: 2px 0 #E11D48;
+            animation: glitch-anim-1 2s infinite linear alternate-reverse;
+        }
+
+        .glitch:hover::after {
+            left: 2px;
+            text-shadow: -2px 0 #991B1B;
+            animation: glitch-anim-2 2.5s infinite linear alternate-reverse;
+        }
+
+        @keyframes glitch-anim-1 {
+            0% { clip: rect(10px, 9999px, 35px, 0); }
+            50% { clip: rect(60px, 9999px, 85px, 0); }
+            100% { clip: rect(20px, 9999px, 45px, 0); }
+        }
+
+        @keyframes glitch-anim-2 {
+            0% { clip: rect(40px, 9999px, 70px, 0); }
+            50% { clip: rect(15px, 9999px, 30px, 0); }
+            100% { clip: rect(75px, 9999px, 100px, 0); }
+        }
+
+        /* Glassmorphism with Dark Blood Trims */
+        .glass {
+            background: rgba(12, 10, 14, 0.7);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-top: 1px solid rgba(225, 29, 72, 0.3);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.75);
+            transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+        }
+
+        .glass:hover {
+            border-color: rgba(225, 29, 72, 0.55);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.9), 0 0 30px rgba(225, 29, 72, 0.2);
+        }
+
+        /* Top Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #450A0A, #991B1B, #E11D48);
+            z-index: 99999;
+            transition: width 0.1s linear;
+        }
+
+        /* Blood Lantern Torch Follower */
+        .cursor-light {
+            position: fixed;
+            width: 500px;
+            height: 500px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(225, 29, 72, 0.09) 0%, transparent 65%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition: transform 0.06s linear;
+        }
+
+        /* Reveal on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(45px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Flickering Candle Light */
+        @keyframes flicker {
+            0%, 100% { opacity: 0.9; }
+            20% { opacity: 0.6; }
+            23% { opacity: 0.95; }
+            45% { opacity: 0.7; }
+            60% { opacity: 0.85; }
+            80% { opacity: 0.55; }
+        }
+
+        .flicker {
+            animation: flicker 5s infinite;
+        }
+    </style>
+</head>
+
+<body class="selection:bg-horror-crimson selection:text-white">
+
+    <!-- Screen Vignette & Scanlines -->
+    <div class="scanlines"></div>
+
+    <!-- Reading Progress Bar -->
+    <div id="progress-bar"></div>
+
+    <!-- Background Mist & Atmosphere -->
+    <div class="shadow-mist"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-5 left-1/2 -translate-x-1/2 w-[min(1150px,92%)] z-50">
+        <div class="glass px-6 py-4 rounded-full flex items-center justify-between border-white/5">
+            <a href="index.html" class="flex items-center gap-2 text-zinc-400 hover:text-horror-crimson font-mono text-sm tracking-wide transition-all group">
+                <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                <span>Portfolio</span>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-horror-crimson animate-ping"></span>
+                <span class="font-gothic tracking-[0.2em] text-base sm:text-lg font-bold text-white uppercase">
+                    Dark Fiction
+                </span>
+            </div>
+
+            <a href="#archives" class="hidden sm:inline-block font-mono text-xs px-4 py-1.5 rounded-full border border-horror-crimson/40 text-horror-crimson hover:bg-horror-crimson hover:text-white transition-all">
+                Classified Files
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative flex items-center justify-center pt-28 pb-16 px-6 text-center">
+        <div class="max-w-4xl mx-auto z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-horror-crimson/30 mb-6">
+                <i class="fas fa-skull text-horror-crimson text-xs"></i>
+                <span class="font-mono text-xs text-rose-300 uppercase tracking-[0.25em]">Psychological & Paranormal Archive</span>
+            </div>
+
+            <h1 class="font-gothic text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tight leading-[1] mb-6 glitch" data-text="Whispers in the Dark">
+                Whispers in <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-horror-crimson via-rose-500 to-red-950 flicker">The Dark</span>
+            </h1>
+
+            <p class="text-zinc-400 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+                True horror is not a jump scare. It is the creeping realization that the sound behind your bedroom door isn't the wind, and whatever is waiting knows your name.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#archives" class="px-8 py-4 rounded-full bg-gradient-to-r from-horror-blood to-horror-crimson text-white font-mono tracking-wider uppercase font-bold text-sm hover:shadow-[0_0_35px_rgba(225,29,72,0.5)] hover:-translate-y-1 transition-all">
+                    Enter Archive <i class="fas fa-book-dead ml-2"></i>
+                </a>
+                <a href="#process" class="px-8 py-4 rounded-full glass font-mono tracking-wider uppercase font-semibold text-sm text-zinc-300 hover:bg-white/5 hover:border-horror-crimson/60 transition-all">
+                    The Anatomy of Fear
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-600 flex flex-col items-center gap-2">
+            <span>PROCEED INTO SHADOW</span>
+            <i class="fas fa-chevron-down animate-bounce text-horror-crimson"></i>
+        </div>
+    </section>
+
+    <!-- Genre Classifications -->
+    <section class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass rounded-3xl p-6 text-center border-horror-crimson/20">
+                <i class="fas fa-brain text-2xl text-horror-crimson mb-3"></i>
+                <div class="font-gothic text-xl font-bold text-white mb-1">Psychological</div>
+                <div class="font-mono text-xs text-zinc-500">Paranoia, isolation, and unreliable memories that dissolve reality.</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-horror-crimson/20">
+                <i class="fas fa-ghost text-2xl text-rose-400 mb-3"></i>
+                <div class="font-gothic text-xl font-bold text-white mb-1">Paranormal</div>
+                <div class="font-mono text-xs text-zinc-500">Ancient folklore, curses, and restless spirits bound to abandoned soil.</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-horror-crimson/20">
+                <i class="fas fa-eye text-2xl text-horror-crimson mb-3"></i>
+                <div class="font-gothic text-xl font-bold text-white mb-1">Cosmic Dread</div>
+                <div class="font-mono text-xs text-zinc-500">Forces far older and colder than humanity, lurking just beyond perception.</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-horror-crimson/20">
+                <i class="fas fa-tape text-2xl text-rose-400 mb-3"></i>
+                <div class="font-gothic text-xl font-bold text-white mb-1">Analog Horror</div>
+                <div class="font-mono text-xs text-zinc-500">Found footage, degraded audio cassettes, and broadcasts that should not exist.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Story Archive Section -->
+    <section id="archives" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs text-horror-crimson tracking-[0.3em] uppercase mb-3">CLASSIFIED DOSSIERS</p>
+            <h2 class="font-gothic text-4xl sm:text-6xl uppercase font-bold tracking-tight text-white">The Story Vault</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base mt-3">Selected manuscripts written to explore dread, regret, and the unknown.</p>
+        </div>
+
+        <div class="space-y-12">
+            <!-- Story 1 -->
+            <article class="glass rounded-[35px] p-8 md:p-14 transition duration-500 hover:scale-[1.01] border-horror-crimson/30">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                    <div>
+                        <span class="font-mono text-xs text-horror-crimson uppercase tracking-widest">CASE FILE #084 • PSYCHOLOGICAL THRILLER</span>
+                        <h3 class="font-gothic text-3xl sm:text-4xl text-white font-bold mt-1">The Knocking from Inside the Mirror</h3>
+                    </div>
+                    <div class="flex gap-2 font-mono text-xs">
+                        <span class="glass px-3 py-1 rounded-full text-rose-300"><i class="fas fa-clock mr-1"></i> 6 min read</span>
+                        <span class="glass px-3 py-1 rounded-full text-zinc-400"><i class="fas fa-exclamation-triangle mr-1"></i> Disturbed Narrative</span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 text-zinc-300 text-base leading-relaxed space-y-4 font-typewriter">
+                        <p>
+                            "At first, it sounded like water pipes groaning behind the drywall. But old pipes don't pause when you hold your breath, nor do they mimic your exact cadence."
+                        </p>
+                        <p>
+                            "When I finally wiped the steam off the bathroom glass, my reflection wasn't waiting for my arm to drop. It just stood there, smiling with teeth that were far too sharp to belong to me."
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 border-white/5 font-mono text-xs text-zinc-400 space-y-3">
+                        <div class="text-horror-crimson uppercase tracking-wider font-bold mb-2">Transcript Summary</div>
+                        <div class="flex justify-between"><span>LOCATION:</span> <span class="text-white">Rain-soaked Flat 4B</span></div>
+                        <div class="flex justify-between"><span>TIME RECORDED:</span> <span class="text-white">03:14 AM</span></div>
+                        <div class="flex justify-between"><span>THEME:</span> <span class="text-white">Doppelgänger Paranoia</span></div>
+                        <div class="flex justify-between"><span>STATUS:</span> <span class="text-rose-400">Archived Fragment</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Story 2 -->
+            <article class="glass rounded-[35px] p-8 md:p-14 transition duration-500 hover:scale-[1.01] border-horror-crimson/30">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                    <div>
+                        <span class="font-mono text-xs text-rose-400 uppercase tracking-widest">CASE FILE #109 • FOLKLORE & FOREST DREAD</span>
+                        <h3 class="font-gothic text-3xl sm:text-4xl text-white font-bold mt-1">The Old Well in Morigaon</h3>
+                    </div>
+                    <div class="flex gap-2 font-mono text-xs">
+                        <span class="glass px-3 py-1 rounded-full text-rose-300"><i class="fas fa-clock mr-1"></i> 8 min read</span>
+                        <span class="glass px-3 py-1 rounded-full text-zinc-400"><i class="fas fa-moon mr-1"></i> Night Horror</span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 text-zinc-300 text-base leading-relaxed space-y-4 font-typewriter">
+                        <p>
+                            "The villagers said never cross the bamboo grove after dusk if you hear someone whispering your childhood nickname. The voice isn't coming from the path ahead; it rises from the dried-up stone well covered in creepers."
+                        </p>
+                        <p>
+                            "I didn't answer. But the moment I quickened my stride, the sound of wet footsteps stepped out of the leaves right behind my neck."
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 border-white/5 font-mono text-xs text-zinc-400 space-y-3">
+                        <div class="text-horror-crimson uppercase tracking-wider font-bold mb-2">Transcript Summary</div>
+                        <div class="flex justify-between"><span>SETTING:</span> <span class="text-white">Rural Assam Bamboo Thicket</span></div>
+                        <div class="flex justify-between"><span>ENTITY:</span> <span class="text-white">The Mimic in the Hollow</span></div>
+                        <div class="flex justify-between"><span>THEME:</span> <span class="text-white">Folklore & Superstition</span></div>
+                        <div class="flex justify-between"><span>STATUS:</span> <span class="text-rose-400">Ongoing Draft</span></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- The Craft & Process Section -->
+    <section id="process" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="glass rounded-[38px] p-8 md:p-14 border-horror-crimson/30 relative overflow-hidden">
+            <div class="absolute -right-20 -bottom-20 w-96 h-96 bg-horror-crimson/10 rounded-full blur-3xl pointer-events-none"></div>
+
+            <div class="flex flex-col lg:flex-row gap-12 items-center">
+                <div class="w-full lg:w-1/2">
+                    <p class="font-mono text-xs uppercase tracking-[0.3em] text-horror-crimson mb-2">The Architecture of Dread</p>
+                    <h2 class="font-gothic text-3xl sm:text-5xl uppercase font-bold text-white mb-6">
+                        How Fear is Built
+                    </h2>
+                    <p class="text-zinc-400 text-sm md:text-base leading-relaxed mb-6 font-light">
+                        Scaring someone requires patience. A successful horror piece establishes a quiet rhythm of normality before slowly fracturing one detail at a time.
+                    </p>
+
+                    <div class="space-y-4 font-mono text-xs text-zinc-300">
+                        <div class="glass p-3 rounded-2xl flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-horror-blood flex items-center justify-center font-bold text-white">1</span>
+                            <span>The Uncanny Shift — Something ordinary feels slightly wrong.</span>
+                        </div>
+                        <div class="glass p-3 rounded-2xl flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-horror-blood flex items-center justify-center font-bold text-white">2</span>
+                            <span>Sensory Deprivation — Limiting sight to elevate sound and breath.</span>
+                        </div>
+                        <div class="glass p-3 rounded-2xl flex items-center gap-3">
+                            <span class="w-6 h-6 rounded-full bg-horror-blood flex items-center justify-center font-bold text-white">3</span>
+                            <span>The Irreversible Climax — The monster was never outside; it was already in the room.</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="w-full lg:w-1/2">
+                    <div class="glass rounded-3xl p-8 border-white/10 space-y-6">
+                        <div class="border-b border-white/5 pb-4">
+                            <h4 class="font-gothic text-lg text-white mb-1">Atmospheric Rulebook</h4>
+                            <p class="text-zinc-400 text-xs font-mono">Principles followed in every Rio suspense manuscript:</p>
+                        </div>
+                        <ul class="space-y-3 font-mono text-xs text-zinc-400">
+                            <li><i class="fas fa-crosshairs text-horror-crimson mr-2"></i> Never show the monster fully in broad daylight.</li>
+                            <li><i class="fas fa-crosshairs text-horror-crimson mr-2"></i> Psychological damage cuts deeper than gore.</li>
+                            <li><i class="fas fa-crosshairs text-horror-crimson mr-2"></i> End with a lingering question rather than an easy answer.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Chilling Quote -->
+    <section class="py-28 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="font-gothic text-3xl sm:text-5xl md:text-6xl uppercase font-bold tracking-tight text-white leading-tight">
+                "Monsters don't live under your bed. <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-horror-crimson to-rose-400">They look out through your eyes when everyone else is asleep.</span>"
+            </p>
+            <div class="mt-8 font-mono text-xs tracking-widest text-zinc-600 uppercase">
+                // Jonaid Ahmed • Midnight Field Notes
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 text-center border-t border-white/10 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+                <a href="index.html" class="font-gothic text-xl uppercase font-bold tracking-wider text-white">
+                    Jonaid Ahmed
+                </a>
+                <p class="font-mono text-xs text-zinc-500 mt-1">Coded in the matrix. Whispered in the dark.</p>
+            </div>
+            <div class="flex items-center gap-6 text-zinc-400 font-mono text-xs">
+                <a href="index.html" class="hover:text-horror-crimson transition-colors">Home</a>
+                <a href="poetry.html" class="hover:text-horror-crimson transition-colors">Poetry</a>
+                <a href="mountains.html" class="hover:text-horror-crimson transition-colors">Mountains</a>
+            </div>
+            <p class="font-mono text-xs text-zinc-600">
+                &copy; 2026 Jonaid Ahmed. Don't look behind you.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Reading Progress Indicator
+        const progressBar = document.getElementById("progress-bar");
+        window.addEventListener("scroll", () => {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / total) * 100;
+            progressBar.style.width = progress + "%";
+        });
+
+        // Intersection Observer for Smooth Reveal Transitions
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll("section, article, .glass").forEach(el => {
+            el.classList.add("reveal");
+            observer.observe(el);
+        });
+
+        // Blood Lantern Mouse Light Follower
+        const light = document.createElement("div");
+        light.className = "cursor-light";
+        document.body.appendChild(light);
+
+        document.addEventListener("mousemove", (e) => {
+            light.style.left = e.clientX + "px";
+            light.style.top = e.clientY + "px";
+        });
+
+        // 3D Glass Tilt
+        const isHoverDevice = matchMedia('(hover: hover)').matches;
+        if (isHoverDevice) {
+            document.querySelectorAll(".glass").forEach(card => {
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateY = ((x / rect.width) - 0.5) * 10;
+                    const rotateX = ((y / rect.height) - 0.5) * -10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "";
+                });
+            });
+        }
+    </script>
+</body>
+</html>

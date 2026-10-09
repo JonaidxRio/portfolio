@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Cosmos & Thought • Jonaid Ahmed</title>
+    <meta name="description" content="Astrophysics, existential philosophy, orbital mechanics, and contemplating the infinite vacuum. Essays and thought logs by Jonaid Ahmed (Rio).">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Orbitron:wght@500;600;700;800;900&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        cosmos: {
+                            purple: '#9333EA',
+                            neon: '#C084FC',
+                            electric: '#3B82F6',
+                            cyan: '#06B6D4',
+                            deep: '#030308',
+                            stellar: '#080915',
+                            glow: 'rgba(147, 51, 234, 0.15)'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        orbit: ['Orbitron', 'sans-serif'],
+                        mono: ['"Space Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #030308;
+            color: #E2E8F0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Cosmic Nebulae Atmosphere */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 75% 15%, rgba(147, 51, 234, 0.18) 0%, transparent 45%),
+                radial-gradient(circle at 20% 50%, rgba(59, 130, 246, 0.14) 0%, transparent 50%),
+                radial-gradient(circle at 60% 85%, rgba(6, 182, 212, 0.10) 0%, transparent 55%),
+                linear-gradient(180deg, #030308 0%, #070914 50%, #020205 100%);
+            z-index: -4;
+        }
+
+        /* Twinkling Star Canvas Pattern */
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: 
+                radial-gradient(1px 1px at 20px 30px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 140px 70px, #c084fc, rgba(0,0,0,0)),
+                radial-gradient(1px 1px at 220px 180px, #38bdf8, rgba(0,0,0,0)),
+                radial-gradient(1.5px 1.5px at 300px 90px, #ffffff, rgba(0,0,0,0)),
+                radial-gradient(2px 2px at 450px 220px, #a855f7, rgba(0,0,0,0));
+            background-size: 550px 550px;
+            opacity: 0.4;
+            pointer-events: none;
+            z-index: -3;
+        }
+
+        /* Drifting Nebula Clouds */
+        .nebula-glow {
+            position: fixed;
+            width: 700px;
+            height: 700px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.18) 0%, transparent 70%);
+            filter: blur(140px);
+            top: -200px;
+            left: 20%;
+            z-index: -2;
+            animation: cosmicDrift 24s ease-in-out infinite alternate;
+        }
+
+        @keyframes cosmicDrift {
+            0% { transform: translateY(0) scale(1); }
+            100% { transform: translateY(120px) scale(1.15); }
+        }
+
+        /* Planetary Orbit Visual Ring */
+        .orbit-ring {
+            position: absolute;
+            border: 1px dashed rgba(192, 132, 252, 0.2);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: spinOrbit 45s linear infinite;
+        }
+
+        @keyframes spinOrbit {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* Apple-Grade Cosmic Glassmorphism */
+        .glass {
+            background: rgba(8, 9, 21, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(192, 132, 252, 0.3);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.65);
+            transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+        }
+
+        .glass:hover {
+            border-color: rgba(192, 132, 252, 0.5);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 35px rgba(147, 51, 234, 0.2);
+        }
+
+        /* Top Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #3B82F6, #9333EA, #C084FC);
+            z-index: 99999;
+            transition: width 0.1s linear;
+        }
+
+        /* Stellar Follower Torch */
+        .cursor-light {
+            position: fixed;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(147, 51, 234, 0.1) 0%, transparent 65%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition: transform 0.06s linear;
+        }
+
+        /* Reveal on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(45px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-cosmos-purple selection:text-white">
+
+    <!-- Progress Indicator -->
+    <div id="progress-bar"></div>
+
+    <!-- Drifting Nebula Background -->
+    <div class="nebula-glow"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-5 left-1/2 -translate-x-1/2 w-[min(1150px,92%)] z-50">
+        <div class="glass px-6 py-4 rounded-full flex items-center justify-between border-white/5">
+            <a href="index.html" class="flex items-center gap-2 text-zinc-400 hover:text-cosmos-neon font-mono text-sm tracking-wide transition-all group">
+                <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                <span>Portfolio</span>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-cosmos-purple animate-pulse"></span>
+                <span class="font-orbit tracking-[0.2em] text-sm sm:text-base font-bold text-white uppercase">
+                    Cosmos & Thought
+                </span>
+            </div>
+
+            <a href="#timeline" class="hidden sm:inline-block font-mono text-xs px-4 py-1.5 rounded-full border border-cosmos-purple/40 text-cosmos-neon hover:bg-cosmos-purple hover:text-white transition-all">
+                Stellar Log
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative flex items-center justify-center pt-28 pb-16 px-6 text-center overflow-hidden">
+        <!-- Subtle Orbit Visual in Hero -->
+        <div class="orbit-ring w-[600px] h-[600px] -top-20 opacity-30"></div>
+        <div class="orbit-ring w-[850px] h-[850px] -top-52 opacity-15" style="animation-direction: reverse; animation-duration: 65s;"></div>
+
+        <div class="max-w-4xl mx-auto z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-cosmos-purple/30 mb-6">
+                <i class="fas fa-atom text-cosmos-neon text-xs animate-spin" style="animation-duration: 8s;"></i>
+                <span class="font-mono text-xs text-cosmos-neon uppercase tracking-[0.25em]">Astrophysics • Existential Inquiries</span>
+            </div>
+
+            <h1 class="font-orbit text-4xl sm:text-6xl md:text-8xl font-black uppercase tracking-tight leading-[1] mb-6">
+                The Edge Of <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cosmos-neon to-purple-300">Infinite Space</span>
+            </h1>
+
+            <p class="text-zinc-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+                We are pieces of exploded stars observing ourselves. A notebook dedicated to gravitational anomalies, relativity, and deep philosophical reflections.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#thoughts" class="px-8 py-4 rounded-full bg-gradient-to-r from-cosmos-purple to-cosmos-electric text-white font-orbit tracking-wider uppercase font-bold text-sm hover:shadow-[0_0_35px_rgba(147,51,234,0.5)] hover:-translate-y-1 transition-all">
+                    Read Essays <i class="fas fa-meteor ml-2 text-xs"></i>
+                </a>
+                <a href="#timeline" class="px-8 py-4 rounded-full glass font-orbit tracking-wider uppercase font-semibold text-sm text-zinc-300 hover:bg-white/5 hover:border-cosmos-purple/60 transition-all">
+                    Cosmic Chronology
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-600 flex flex-col items-center gap-2">
+            <span>OBSERVE HORIZON</span>
+            <i class="fas fa-chevron-down animate-bounce text-cosmos-neon"></i>
+        </div>
+    </section>
+
+    <!-- Fundamental Pillars -->
+    <section class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            <div class="glass rounded-3xl p-6 text-center border-cosmos-purple/20">
+                <i class="fas fa-circle-notch text-2xl text-cosmos-neon mb-3"></i>
+                <div class="font-orbit text-lg font-bold text-white mb-1">Singularities</div>
+                <div class="font-mono text-xs text-zinc-400">Where gravitational wells compress physics to infinite density and break time.</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-cosmos-purple/20">
+                <i class="fas fa-hourglass-half text-2xl text-blue-400 mb-3"></i>
+                <div class="font-orbit text-lg font-bold text-white mb-1">Time Dilation</div>
+                <div class="font-mono text-xs text-zinc-400">The realization that "now" is merely a localized illusion of the observer.</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-cosmos-purple/20">
+                <i class="fas fa-satellite text-2xl text-cyan-400 mb-3"></i>
+                <div class="font-orbit text-lg font-bold text-white mb-1">Cosmic Silence</div>
+                <div class="font-mono text-xs text-zinc-400">The Fermi Paradox and the quiet void between galactic civilizations.</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-cosmos-purple/20">
+                <i class="fas fa-brain text-2xl text-purple-400 mb-3"></i>
+                <div class="font-orbit text-lg font-bold text-white mb-1">Consciousness</div>
+                <div class="font-mono text-xs text-zinc-400">Matter arranging itself to ponder its own origin and ultimate fate.</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Thought Essays / Papers -->
+    <section id="thoughts" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs text-cosmos-neon tracking-[0.3em] uppercase mb-3">PAPERS & MEDITATIONS</p>
+            <h2 class="font-orbit text-4xl sm:text-6xl uppercase font-bold tracking-tight text-white">Thought Logs</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base mt-3">Essays on existential perspective and the physics of the incomprehensible.</p>
+        </div>
+
+        <div class="space-y-12">
+            <!-- Essay 1 -->
+            <article class="glass rounded-[35px] p-8 md:p-14 transition duration-500 hover:scale-[1.01] border-cosmos-purple/30">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                    <div>
+                        <span class="font-mono text-xs text-cosmos-neon uppercase tracking-widest">DISPATCH #01 • ASTROPHYSICS</span>
+                        <h3 class="font-orbit text-2xl sm:text-4xl text-white font-bold mt-1">Light Travels Across Ghost Universes</h3>
+                    </div>
+                    <div class="flex gap-2 font-mono text-xs">
+                        <span class="glass px-3 py-1 rounded-full text-blue-300"><i class="fas fa-clock mr-1"></i> 4 min read</span>
+                        <span class="glass px-3 py-1 rounded-full text-zinc-400"><i class="fas fa-satellite-dish mr-1"></i> Deep Field</span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 text-zinc-300 text-base leading-relaxed space-y-4 font-light">
+                        <p>
+                            When you look up at the Andromeda galaxy, the photons striking your retina set out 2.5 million years ago. You aren’t gazing into space—you are peering into archeological time.
+                        </p>
+                        <p>
+                            In the cosmic scope, human conflicts, borders, and ego evaporate. We are fragile passengers on an insignificant speck of dust illuminated by an ordinary G-type star in a minor spiral arm. That doesn’t make us meaningless—it makes the fact that we can comprehend it an extraordinary miracle.
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 border-white/5 font-mono text-xs text-zinc-400 space-y-3">
+                        <div class="text-cosmos-neon uppercase tracking-wider font-bold mb-2">Observational Data</div>
+                        <div class="flex justify-between"><span>TARGET:</span> <span class="text-white">M31 / Andromeda</span></div>
+                        <div class="flex justify-between"><span>DISTANCE:</span> <span class="text-white">2.537M Light Years</span></div>
+                        <div class="flex justify-between"><span>SCALE:</span> <span class="text-white">1 Trillion Solar Systems</span></div>
+                        <div class="flex justify-between"><span>COLLISION:</span> <span class="text-cosmos-neon">~4.5B Years</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Essay 2 -->
+            <article class="glass rounded-[35px] p-8 md:p-14 transition duration-500 hover:scale-[1.01] border-cosmos-purple/30">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                    <div>
+                        <span class="font-mono text-xs text-blue-400 uppercase tracking-widest">DISPATCH #02 • PHILOSOPHICAL PHYSICS</span>
+                        <h3 class="font-orbit text-2xl sm:text-4xl text-white font-bold mt-1">Entropy: The One-Way Arrow of Time</h3>
+                    </div>
+                    <div class="flex gap-2 font-mono text-xs">
+                        <span class="glass px-3 py-1 rounded-full text-cosmos-neon"><i class="fas fa-clock mr-1"></i> 5 min read</span>
+                        <span class="glass px-3 py-1 rounded-full text-zinc-400"><i class="fas fa-fire mr-1"></i> Thermodynamics</span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 text-zinc-300 text-base leading-relaxed space-y-4 font-light">
+                        <p>
+                            Why do we remember the past but not the future? The second law of thermodynamics is the only law in physics that recognizes an asymmetric direction. Order dissolves into disorder.
+                        </p>
+                        <p>
+                            Life is an intentional, temporary rebel against entropy. By thinking, writing, gardening, and building software, we concentrate local order in a universe inexorably drifting toward thermodynamic equilibrium.
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 border-white/5 font-mono text-xs text-zinc-400 space-y-3">
+                        <div class="text-blue-400 uppercase tracking-wider font-bold mb-2">Concept Mapping</div>
+                        <div class="flex justify-between"><span>CORE LAW:</span> <span class="text-white">2nd Law of Thermodynamics</span></div>
+                        <div class="flex justify-between"><span>STATUS:</span> <span class="text-white">Irreversible Arrow</span></div>
+                        <div class="flex justify-between"><span>DESTINY:</span> <span class="text-white">Cosmic Heat Death</span></div>
+                        <div class="flex justify-between"><span>PURPOSE:</span> <span class="text-blue-400">Local Preservation</span></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Astronomy Timeline -->
+    <section id="timeline" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="glass rounded-[38px] p-8 md:p-14 border-cosmos-purple/30 relative overflow-hidden">
+            <div class="text-center mb-12">
+                <p class="font-mono text-xs text-cosmos-neon uppercase tracking-[0.3em] mb-2">CHRONOLOGY OF SCALE</p>
+                <h2 class="font-orbit text-3xl sm:text-5xl uppercase font-bold text-white">The Cosmic Calendar</h2>
+            </div>
+
+            <div class="grid md:grid-cols-4 gap-6">
+                <div class="glass p-6 rounded-2xl text-center">
+                    <div class="font-mono text-xs text-zinc-400 mb-2">T = 0</div>
+                    <div class="font-orbit text-xl text-white font-bold mb-2">Big Bang</div>
+                    <p class="text-xs text-zinc-400 leading-relaxed font-mono">13.8 billion years ago. Energy, space, and time expand outward from infinite density.</p>
+                </div>
+
+                <div class="glass p-6 rounded-2xl text-center">
+                    <div class="font-mono text-xs text-zinc-400 mb-2">T + 9.2B yrs</div>
+                    <div class="font-orbit text-xl text-white font-bold mb-2">Solar Nebula</div>
+                    <p class="text-xs text-zinc-400 leading-relaxed font-mono">Our Sun ignites from gravitational collapse of recycled supernova stardust.</p>
+                </div>
+
+                <div class="glass p-6 rounded-2xl text-center">
+                    <div class="font-mono text-xs text-zinc-400 mb-2">T + 13.5B yrs</div>
+                    <div class="font-orbit text-xl text-white font-bold mb-2">Consciousness</div>
+                    <p class="text-xs text-zinc-400 leading-relaxed font-mono">Biological neural networks evolve capable of contemplating their own place in the void.</p>
+                </div>
+
+                <div class="glass p-6 rounded-2xl text-center">
+                    <div class="font-mono text-xs text-zinc-400 mb-2">T + ∞</div>
+                    <div class="font-orbit text-xl text-white font-bold mb-2">The Quiet Age</div>
+                    <p class="text-xs text-zinc-400 leading-relaxed font-mono">The last red dwarf burns out. Only cold gravitational echoes and black holes remain.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Philosophical Inscription -->
+    <section class="py-28 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="font-orbit text-3xl sm:text-5xl md:text-6xl uppercase font-bold tracking-tight text-white leading-tight">
+                "The cosmos is within us. <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 via-cosmos-neon to-purple-400">We are a way for the universe to know itself."</span>
+            </p>
+            <div class="mt-8 font-mono text-xs tracking-widest text-zinc-500 uppercase">
+                // Carl Sagan • Stellar Meditation
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 text-center border-t border-white/10 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+                <a href="index.html" class="font-orbit text-xl uppercase font-bold tracking-wider text-white">
+                    Jonaid Ahmed
+                </a>
+                <p class="font-mono text-xs text-zinc-500 mt-1">Coded in the matrix. Gazing at the stars.</p>
+            </div>
+            <div class="flex items-center gap-6 text-zinc-400 font-mono text-xs">
+                <a href="index.html" class="hover:text-cosmos-neon transition-colors">Home</a>
+                <a href="poetry.html" class="hover:text-cosmos-neon transition-colors">Poetry</a>
+                <a href="bike.html" class="hover:text-cosmos-neon transition-colors">The Bike Nomad</a>
+            </div>
+            <p class="font-mono text-xs text-zinc-600">
+                &copy; 2026 Jonaid Ahmed. Preserving order against entropy.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Reading Progress Indicator
+        const progressBar = document.getElementById("progress-bar");
+        window.addEventListener("scroll", () => {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / total) * 100;
+            progressBar.style.width = progress + "%";
+        });
+
+        // Intersection Observer for Smooth Reveal Transitions
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll("section, article, .glass").forEach(el => {
+            el.classList.add("reveal");
+            observer.observe(el);
+        });
+
+        // Cosmic Glow Follower
+        const light = document.createElement("div");
+        light.className = "cursor-light";
+        document.body.appendChild(light);
+
+        document.addEventListener("mousemove", (e) => {
+            light.style.left = e.clientX + "px";
+            light.style.top = e.clientY + "px";
+        });
+
+        // 3D Glass Tilt
+        const isHoverDevice = matchMedia('(hover: hover)').matches;
+        if (isHoverDevice) {
+            document.querySelectorAll(".glass").forEach(card => {
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateY = ((x / rect.width) - 0.5) * 10;
+                    const rotateX = ((y / rect.height) - 0.5) * -10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "";
+                });
+            });
+        }
+    </script>
+</body>
+</html>

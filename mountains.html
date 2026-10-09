@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html lang="en" class="scroll-smooth">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Mountain Calling • Jonaid Ahmed</title>
+    <meta name="description" content="High summits, quiet pine forests, alpine mist, and high-altitude solitude. Personal trekking journal and nature musings by Jonaid Ahmed.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&family=Cinzel:wght@500;600;700;800&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        alpine: {
+                            emerald: '#10B981',
+                            pine: '#064E3B',
+                            frost: '#38BDF8',
+                            mist: '#E0F2FE',
+                            deep: '#060B0E',
+                            stone: '#0F171E'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        summit: ['Cinzel', 'serif'],
+                        mono: ['"Space Mono"', 'monospace']
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #060B0E;
+            color: #E2E8F0;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Alpine Forest & Glacial Sky Atmosphere */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background:
+                radial-gradient(circle at 75% 15%, rgba(56, 189, 248, 0.12) 0%, transparent 45%),
+                radial-gradient(circle at 15% 55%, rgba(16, 185, 129, 0.10) 0%, transparent 50%),
+                radial-gradient(circle at 50% 90%, rgba(6, 78, 59, 0.20) 0%, transparent 60%),
+                linear-gradient(180deg, #060B0E 0%, #0A1319 50%, #04080B 100%);
+            z-index: -4;
+        }
+
+        /* Drifting Alpine Mist Sheets */
+        .fog-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.25;
+            background: radial-gradient(ellipse at 50% 50%, rgba(224, 242, 254, 0.08) 0%, transparent 70%);
+            filter: blur(50px);
+            animation: driftFog 28s ease-in-out infinite alternate;
+        }
+
+        .fog-layer-2 {
+            position: fixed;
+            bottom: 0;
+            left: -30%;
+            width: 160%;
+            height: 50%;
+            pointer-events: none;
+            z-index: -2;
+            opacity: 0.18;
+            background: radial-gradient(ellipse at 50% 100%, rgba(56, 189, 248, 0.15), transparent 75%);
+            filter: blur(80px);
+            animation: driftFog2 22s ease-in-out infinite alternate;
+        }
+
+        @keyframes driftFog {
+            0% { transform: translateX(-6%) translateY(0); }
+            100% { transform: translateX(6%) translateY(-4%); }
+        }
+
+        @keyframes driftFog2 {
+            0% { transform: translateX(0) scale(1); }
+            100% { transform: translateX(-8%) scale(1.08); }
+        }
+
+        /* Mountain Silhouette Graphic (CSS Gradient Peaks) */
+        .peaks-backdrop {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 280px;
+            pointer-events: none;
+            z-index: -3;
+            opacity: 0.12;
+            background: linear-gradient(135deg, transparent 40%, rgba(56, 189, 248, 0.3) 70%, transparent 100%),
+                        linear-gradient(225deg, transparent 40%, rgba(16, 185, 129, 0.3) 70%, transparent 100%);
+            clip-path: polygon(0% 100%, 15% 45%, 35% 80%, 55% 30%, 75% 70%, 90% 20%, 100% 100%);
+        }
+
+        /* Glassmorphism */
+        .glass {
+            background: rgba(15, 23, 30, 0.65);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-top: 1px solid rgba(56, 189, 248, 0.25);
+            box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+            transition: border-color 0.4s ease, transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1), box-shadow 0.4s ease;
+        }
+
+        .glass:hover {
+            border-color: rgba(56, 189, 248, 0.45);
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.65), 0 0 30px rgba(16, 185, 129, 0.12);
+        }
+
+        /* Top Progress Bar */
+        #progress-bar {
+            position: fixed;
+            top: 0;
+            left: 0;
+            height: 3px;
+            width: 0;
+            background: linear-gradient(90deg, #10B981, #38BDF8, #E0F2FE);
+            z-index: 99999;
+            transition: width 0.1s linear;
+        }
+
+        /* Ambient Cursor Lantern */
+        .cursor-light {
+            position: fixed;
+            width: 520px;
+            height: 520px;
+            border-radius: 50%;
+            pointer-events: none;
+            background: radial-gradient(circle, rgba(56, 189, 248, 0.08) 0%, transparent 65%);
+            transform: translate(-50%, -50%);
+            z-index: -1;
+            transition: transform 0.06s linear;
+        }
+
+        /* Reveal on Scroll */
+        .reveal {
+            opacity: 0;
+            transform: translateY(45px);
+            transition: opacity 0.9s cubic-bezier(0.16, 1, 0.3, 1), transform 0.9s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Altimeter Markings */
+        .altimeter-tick {
+            background-image: repeating-linear-gradient(180deg, rgba(56, 189, 248, 0.4) 0, rgba(56, 189, 248, 0.4) 1px, transparent 1px, transparent 12px);
+        }
+    </style>
+</head>
+
+<body class="selection:bg-alpine-frost selection:text-black">
+
+    <!-- Progress Indicator -->
+    <div id="progress-bar"></div>
+
+    <!-- Atmosphere / Mist -->
+    <div class="fog-layer"></div>
+    <div class="fog-layer-2"></div>
+    <div class="peaks-backdrop"></div>
+
+    <!-- Navigation -->
+    <nav class="fixed top-5 left-1/2 -translate-x-1/2 w-[min(1150px,92%)] z-50">
+        <div class="glass px-6 py-4 rounded-full flex items-center justify-between border-white/10">
+            <a href="index.html" class="flex items-center gap-2 text-zinc-400 hover:text-alpine-frost font-mono text-sm tracking-wide transition-all group">
+                <i class="fas fa-arrow-left transition-transform group-hover:-translate-x-1"></i>
+                <span>Portfolio</span>
+            </a>
+
+            <div class="flex items-center gap-3">
+                <span class="w-2 h-2 rounded-full bg-alpine-frost animate-pulse"></span>
+                <span class="font-summit tracking-[0.25em] text-lg font-bold text-white uppercase">
+                    Mountain Calling
+                </span>
+            </div>
+
+            <a href="#altimeter" class="hidden sm:inline-block font-mono text-xs px-4 py-1.5 rounded-full border border-alpine-frost/40 text-alpine-frost hover:bg-alpine-frost hover:text-black transition-all">
+                Altimeter Log
+            </a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="min-h-screen relative flex items-center justify-center pt-28 pb-16 px-6 text-center">
+        <div class="max-w-4xl mx-auto z-10">
+            <div class="inline-flex items-center gap-2 px-4 py-2 rounded-full glass border-alpine-frost/30 mb-6">
+                <i class="fas fa-mountain text-alpine-frost text-xs"></i>
+                <span class="font-mono text-xs text-sky-200 uppercase tracking-[0.25em]">Alpine Solitude • High Altitude</span>
+            </div>
+
+            <h1 class="font-summit text-5xl sm:text-7xl md:text-9xl uppercase font-bold tracking-tight leading-[0.95] mb-6">
+                Silence In <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 via-alpine-frost to-sky-100">The Heights</span>
+            </h1>
+
+            <p class="text-zinc-300 text-base sm:text-lg md:text-xl max-w-2xl mx-auto leading-relaxed mb-10 font-light">
+                Where clouds scrape against serrated ridge lines, cell reception dissolves, and the only conversation is between heavy boots and frozen limestone.
+            </p>
+
+            <div class="flex flex-wrap items-center justify-center gap-4">
+                <a href="#journal" class="px-8 py-4 rounded-full bg-gradient-to-r from-alpine-emerald to-alpine-frost text-black font-summit tracking-wider uppercase font-bold text-base hover:shadow-[0_0_35px_rgba(56,189,248,0.45)] hover:-translate-y-1 transition-all">
+                    Read Trail Journal <i class="fas fa-hiking ml-2 text-sm"></i>
+                </a>
+                <a href="#places" class="px-8 py-4 rounded-full glass font-summit tracking-wider uppercase font-semibold text-base text-white hover:bg-white/10 hover:border-alpine-frost/60 transition-all">
+                    Sacred Passes
+                </a>
+            </div>
+        </div>
+
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 font-mono text-xs text-zinc-500 flex flex-col items-center gap-2">
+            <span>ASCEND</span>
+            <i class="fas fa-chevron-down animate-bounce text-alpine-frost"></i>
+        </div>
+    </section>
+
+    <!-- Elevation Tracker / Altimeter Stats -->
+    <section id="altimeter" class="py-20 px-6 max-w-6xl mx-auto">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6">
+            <div class="glass rounded-3xl p-6 text-center border-alpine-frost/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Max Summit Reached</div>
+                <div class="font-summit text-4xl sm:text-5xl font-bold text-alpine-frost">4,890<span class="text-2xl font-sans">m</span></div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Goecha La Ridge</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-alpine-frost/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Total Elevation Gain</div>
+                <div class="font-summit text-4xl sm:text-5xl font-bold text-emerald-400">18.4<span class="text-2xl font-sans">k</span></div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Cumulative Vertical Meters</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-alpine-frost/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Freezing Dawn Treks</div>
+                <div class="font-summit text-4xl sm:text-5xl font-bold text-sky-200">27</div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Alpine Starts (Before 4 AM)</div>
+            </div>
+
+            <div class="glass rounded-3xl p-6 text-center border-alpine-frost/20">
+                <div class="font-mono text-xs uppercase tracking-widest text-zinc-400 mb-2">Ridge Bivouacs</div>
+                <div class="font-summit text-4xl sm:text-5xl font-bold text-emerald-300">14</div>
+                <div class="font-mono text-[11px] text-zinc-500 mt-1">Nights Above Tree Line</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Trail Journal Entries -->
+    <section id="journal" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs text-alpine-frost tracking-[0.3em] uppercase mb-3">Field Dispatches</p>
+            <h2 class="font-summit text-4xl sm:text-6xl uppercase font-bold tracking-tight text-white">Hiking Journal</h2>
+            <p class="text-zinc-400 max-w-xl mx-auto text-sm sm:text-base mt-3">Excerpts scratched into damp notebooks by torchlight at high camps.</p>
+        </div>
+
+        <div class="space-y-12">
+            <!-- Journal Card 1 -->
+            <article class="glass rounded-[35px] p-8 md:p-14 transition duration-500 hover:scale-[1.01]">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                    <div>
+                        <span class="font-mono text-xs text-emerald-400 uppercase tracking-widest">EXPEDITION LOG • OCT 2025</span>
+                        <h3 class="font-summit text-3xl sm:text-4xl text-white font-bold mt-1">The Frozen Col at 4,200m</h3>
+                    </div>
+                    <div class="flex gap-2 font-mono text-xs">
+                        <span class="glass px-3 py-1 rounded-full text-sky-300"><i class="fas fa-temperature-low mr-1"></i> -6°C</span>
+                        <span class="glass px-3 py-1 rounded-full text-zinc-400"><i class="fas fa-wind mr-1"></i> 38 km/h</span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 text-zinc-300 text-base leading-relaxed space-y-4 font-light">
+                        <p>
+                            We started under the starlight when frost coated the tent fly like crushed glass. The first three hours were just steady breathing and the rhythmic scrape of microspikes against hard moraine ice.
+                        </p>
+                        <p>
+                            As dawn broke behind the eastern horn, the valleys below remained drowned in thick white clouds, while our ridgeline was blazing in cold, razor-sharp cobalt. You realize how trivial human anxieties are when faced with millions of tons of ancient granite.
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 border-white/5 font-mono text-xs text-zinc-400 space-y-3">
+                        <div class="text-alpine-frost uppercase tracking-wider font-bold mb-2">Waypoint Data</div>
+                        <div class="flex justify-between"><span>TRAIL:</span> <span class="text-white">North Moraine Pass</span></div>
+                        <div class="flex justify-between"><span>PACK WEIGHT:</span> <span class="text-white">14.8 kg</span></div>
+                        <div class="flex justify-between"><span>WATER SOURCE:</span> <span class="text-white">Glacial Melt Runoff</span></div>
+                        <div class="flex justify-between"><span>SHELTER:</span> <span class="text-white">3-Season Wedge Tent</span></div>
+                    </div>
+                </div>
+            </article>
+
+            <!-- Journal Card 2 -->
+            <article class="glass rounded-[35px] p-8 md:p-14 transition duration-500 hover:scale-[1.01]">
+                <div class="flex flex-wrap items-center justify-between gap-4 mb-8 border-b border-white/5 pb-6">
+                    <div>
+                        <span class="font-mono text-xs text-alpine-frost uppercase tracking-widest">EXPEDITION LOG • MAY 2026</span>
+                        <h3 class="font-summit text-3xl sm:text-4xl text-white font-bold mt-1">Pine Silence in the Lower Valleys</h3>
+                    </div>
+                    <div class="flex gap-2 font-mono text-xs">
+                        <span class="glass px-3 py-1 rounded-full text-emerald-300"><i class="fas fa-cloud-rain mr-1"></i> Pine Mist</span>
+                        <span class="glass px-3 py-1 rounded-full text-zinc-400"><i class="fas fa-compass mr-1"></i> Solitude Run</span>
+                    </div>
+                </div>
+
+                <div class="grid lg:grid-cols-3 gap-8 items-start">
+                    <div class="lg:col-span-2 text-zinc-300 text-base leading-relaxed space-y-4 font-light">
+                        <p>
+                            The scent of wet cedar needles and deodar moss after a highland downpour is grounding beyond explanation. No summits to conquer today—just walking through green cathedrals where pine mist floats like silk between ancient trunks.
+                        </p>
+                        <p>
+                            The mountains teach you two things: humility when looking up, and deep stillness when looking inward.
+                        </p>
+                    </div>
+
+                    <div class="glass rounded-2xl p-6 border-white/5 font-mono text-xs text-zinc-400 space-y-3">
+                        <div class="text-emerald-400 uppercase tracking-wider font-bold mb-2">Waypoint Data</div>
+                        <div class="flex justify-between"><span>TRAIL:</span> <span class="text-white">Deodar Ridge Trace</span></div>
+                        <div class="flex justify-between"><span>ELEVATION:</span> <span class="text-white">2,450m</span></div>
+                        <div class="flex justify-between"><span>DURATION:</span> <span class="text-white">6 hrs solo pace</span></div>
+                        <div class="flex justify-between"><span>COMPANION:</span> <span class="text-white">Mountain Dog from Camp</span></div>
+                    </div>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <!-- Sacred Peaks / Favorite Places -->
+    <section id="places" class="py-24 px-6 max-w-6xl mx-auto">
+        <div class="text-center mb-16">
+            <p class="font-mono text-xs text-emerald-400 tracking-[0.3em] uppercase mb-3">Sanctuaries</p>
+            <h2 class="font-summit text-4xl sm:text-6xl uppercase font-bold tracking-tight text-white">Sacred Destinations</h2>
+            <p class="text-zinc-400 max-w-md mx-auto text-sm mt-3">Corners of the earth where peaks command total reverence.</p>
+        </div>
+
+        <div class="grid md:grid-cols-3 gap-6">
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-emerald-500/10 flex items-center justify-center text-emerald-400 text-xl mb-6 group-hover:bg-emerald-400 group-hover:text-black transition-all">
+                    <i class="fas fa-tree"></i>
+                </div>
+                <h3 class="font-summit text-2xl uppercase font-bold text-white mb-2">Tirthan Valley</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">Pristine glacial trout streams bordered by thick Himalayan pine canopies and quiet wooden hamlets.</p>
+                <span class="font-mono text-xs text-emerald-400">ATMOSPHERE: PEACE & RAIN</span>
+            </div>
+
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-sky-500/10 flex items-center justify-center text-sky-400 text-xl mb-6 group-hover:bg-sky-400 group-hover:text-black transition-all">
+                    <i class="fas fa-icicles"></i>
+                </div>
+                <h3 class="font-summit text-2xl uppercase font-bold text-white mb-2">Chopta & Chandrashila</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">360-degree panoramas of snow-draped titans rising like white ramparts across the sky at 4,000m.</p>
+                <span class="font-mono text-xs text-alpine-frost">ATMOSPHERE: HIGH RIDGE DAWN</span>
+            </div>
+
+            <div class="glass rounded-3xl p-8 group transition-all hover:scale-[1.02]">
+                <div class="w-12 h-12 rounded-2xl bg-teal-500/10 flex items-center justify-center text-teal-400 text-xl mb-6 group-hover:bg-teal-400 group-hover:text-black transition-all">
+                    <i class="fas fa-wind"></i>
+                </div>
+                <h3 class="font-summit text-2xl uppercase font-bold text-white mb-2">Dzukou Valley</h3>
+                <p class="text-zinc-400 text-sm leading-relaxed mb-4">Endless rolling emerald hills floating in swirling monsoonal mist at the border of Assam & Nagaland.</p>
+                <span class="font-mono text-xs text-teal-300">ATMOSPHERE: MYSTICAL ROLLING FOG</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Summit Quote Section -->
+    <section class="py-28 px-6 text-center">
+        <div class="max-w-4xl mx-auto">
+            <p class="font-summit text-4xl sm:text-6xl md:text-7xl uppercase font-bold tracking-tight text-white leading-tight">
+                "It is not the mountain we conquer, <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-emerald-300 to-alpine-frost">but ourselves."</span>
+            </p>
+            <div class="mt-8 font-mono text-xs tracking-widest text-zinc-500 uppercase">
+                // Sir Edmund Hillary • Eternal Alpine Creed
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-16 text-center border-t border-white/10 relative z-10">
+        <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6">
+            <div class="text-left">
+                <a href="index.html" class="font-summit text-2xl uppercase font-bold tracking-wider text-white">
+                    Jonaid Ahmed
+                </a>
+                <p class="font-mono text-xs text-zinc-500 mt-1">Coded in the matrix. Centered in the mountains.</p>
+            </div>
+            <div class="flex items-center gap-6 text-zinc-400 font-mono text-xs">
+                <a href="index.html" class="hover:text-alpine-frost transition-colors">Home</a>
+                <a href="bike.html" class="hover:text-alpine-frost transition-colors">The Bike Nomad</a>
+                <a href="poetry.html" class="hover:text-alpine-frost transition-colors">Poetry</a>
+            </div>
+            <p class="font-mono text-xs text-zinc-600">
+                &copy; 2026 Jonaid Ahmed. Leave no trace behind.
+            </p>
+        </div>
+    </footer>
+
+    <!-- Interactive Scripts -->
+    <script>
+        // Reading Progress Indicator
+        const progressBar = document.getElementById("progress-bar");
+        window.addEventListener("scroll", () => {
+            const total = document.documentElement.scrollHeight - window.innerHeight;
+            const progress = (window.pageYOffset / total) * 100;
+            progressBar.style.width = progress + "%";
+        });
+
+        // Intersection Observer for Smooth Reveal Transitions
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add("active");
+                }
+            });
+        }, { threshold: 0.12 });
+
+        document.querySelectorAll("section, article, .glass").forEach(el => {
+            el.classList.add("reveal");
+            observer.observe(el);
+        });
+
+        // Alpine Lantern Follower
+        const light = document.createElement("div");
+        light.className = "cursor-light";
+        document.body.appendChild(light);
+
+        document.addEventListener("mousemove", (e) => {
+            light.style.left = e.clientX + "px";
+            light.style.top = e.clientY + "px";
+        });
+
+        // 3D Glass Tilt
+        const isHoverDevice = matchMedia('(hover: hover)').matches;
+        if (isHoverDevice) {
+            document.querySelectorAll(".glass").forEach(card => {
+                card.addEventListener("mousemove", (e) => {
+                    const rect = card.getBoundingClientRect();
+                    const x = e.clientX - rect.left;
+                    const y = e.clientY - rect.top;
+                    const rotateY = ((x / rect.width) - 0.5) * 10;
+                    const rotateX = ((y / rect.height) - 0.5) * -10;
+
+                    card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateY(-4px)`;
+                });
+
+                card.addEventListener("mouseleave", () => {
+                    card.style.transform = "";
+                });
+            });
+        }
+    </script>
+</body>
+</html>
